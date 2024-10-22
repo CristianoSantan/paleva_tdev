@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Paleva" %></title>
+    <title><%= content_for(:title) || "PaLeva" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -19,6 +19,11 @@
   </head>
 
   <body>
+    <nav class="container mx-auto">
+      <%= link_to root_path do %>
+        <h1>PaLeva</h1>
+      <% end %>
+    </nav>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
