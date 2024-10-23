@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe "usuário se autentica" do
   it "com sucesso" do
-    User.create!(name: 'João Silva', cpf: '12345678910', email: 'joao@email.com', password: 'password1234')
+    cpf = CPF.generate
+    User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
     
     visit root_path
     click_on 'Entrar'
@@ -21,7 +22,8 @@ describe "usuário se autentica" do
   end
 
   it "e faz logout" do
-    User.create!(name: 'João Silva', cpf: '12345678910', email: 'joao@email.com', password: 'password1234')
+    cpf = CPF.generate
+    User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
     
     visit root_path
     click_on 'Entrar'

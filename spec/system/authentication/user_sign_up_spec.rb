@@ -2,11 +2,13 @@ require 'rails_helper'
 
 describe "Usuário cria uma conta" do
   it "com sucesso" do
+    cpf = CPF.generate
+
     visit root_path
     click_on 'Entrar'
     click_on 'Criar uma conta'
     fill_in "Nome",	with: "Maria" 
-    fill_in "CPF",	with: "12345678910" 
+    fill_in "CPF",	with: cpf 
     fill_in "E-mail",	with: "maria@email.com" 
     fill_in "Senha",	with: "password1234" 
     fill_in "Confirme sua senha",	with: "password1234" 

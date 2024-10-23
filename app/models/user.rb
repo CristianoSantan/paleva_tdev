@@ -6,4 +6,14 @@ class User < ApplicationRecord
 
   validates :name, :cpf, presence: true
   validates :cpf, uniqueness: true
+  validates :cpf, length: { is: 11 }
+  validate :cpf_valid
+
+  private
+
+  def cpf_valid
+    unless CPF.valid?(self.cpf)
+      self.errors.add(:cpf, "deve ser válido")
+    end
+  end
 end
