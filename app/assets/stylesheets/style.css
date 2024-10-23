@@ -1,0 +1,11 @@
+.notice {
+  color: green;
+}
+
+.alert {
+  color: red;
+}
+
+.link, nav > form {
+  display: inline;
+}
