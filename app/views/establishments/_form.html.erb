@@ -1,0 +1,34 @@
+<%= form_with(model: @establishment) do |f| %>
+  <div>
+    <%= f.label :brand_name %>
+    <%= f.text_field :brand_name %>
+  </div>
+  <div>
+    <%= f.label :company_name %>
+    <%= f.text_field :company_name %>
+  </div>
+  <div>
+    <%= f.label :cnpj %>
+    <%= f.text_field :cnpj %>
+  </div>
+  <div>
+    <%= f.label :full_address %>
+    <%= f.text_field :full_address %>
+  </div>
+  <div>
+    <%= f.label :phone %>
+    <%= f.text_field :phone %>
+  </div>
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+  <div>
+    <%= f.label :code %>
+    <%= f.text_field :code %>
+  </div>
+  <div>
+    <%= f.hidden_field :user_id, value: @user.id %>
+  </div>
+  <div><%= f.submit 'Criar estabelecimento' %></div>
+<% end %>

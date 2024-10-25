@@ -1,0 +1,13 @@
+<h1>Novo Bebida</h1>
+
+<% if @drink.errors.any? %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @drink.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render 'form' %>
+<div><%= link_to 'Voltar', drinks_path %></div>

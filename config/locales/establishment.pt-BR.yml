@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      establishment: Estabelecimento
+    attributes:
+      establishment:
+        brand_name: "Nome fantasia"
+        company_name: "Nome companhia"
+        cnpj: "CNPJ"
+        full_address: "Endereço"
+        phone: "Telefone"
+        email: "E-mail"
+        code: "Código"
+        user_id: "Usuário"
+        user: "Usuário"

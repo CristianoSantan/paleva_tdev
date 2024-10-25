@@ -1,0 +1,22 @@
+<h1>Bebidas</h1>
+
+<div>
+  <%= link_to 'Cadastrar Bebida', new_drink_path %>
+</div>
+ <% @drinks.each do |drink| %>
+  <div>
+    <h3><%= link_to drink.name, drink_path(drink.id) %></h3>
+    <dl>
+      <dt>Nome:</dt>
+      <dd><%= drink.name %></dd>
+      <dt>Descrição:</dt>
+      <dd><%= drink.description %></dd>
+      <dt>Calorias:</dt>
+      <dd><%= drink.calories %></dd>
+    </dl>
+  </div>
+<% end %>
+
+<% if @drinks.empty? %>
+  <p>Não existem bebidas cadastradas</p>
+<% end %>

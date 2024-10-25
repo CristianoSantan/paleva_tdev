@@ -1,0 +1,21 @@
+<h1>Estabelecimento</h1>
+
+<div>
+  <%= link_to 'Editar Estabelecimento', edit_establishment_path(@establishment) %>
+</div>
+<dl>
+  <dt>Nome fantasia:</dt>
+  <dd><%= @establishment.brand_name %></dd>
+  <dt>Nome da companhia:</dt>
+  <dd><%= @establishment.company_name %></dd>
+  <dt>CNPJ:</dt>
+  <dd><%= @establishment.cnpj %></dd>
+</dl>
+
+<div>
+  <%= link_to 'Pratos', dishes_path %>
+</div>
+
+<div>
+  <%= link_to 'Bebidas', drinks_path %>
+</div>

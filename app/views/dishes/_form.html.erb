@@ -1,0 +1,19 @@
+<%= form_with(model: @dish, data: { turbo: false}) do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div>
+    <%= f.label :calories %>
+    <%= f.text_field :calories %>
+  </div>
+  <div>
+    <%= f.label :establishment_id %>
+    <%= f.hidden_field :establishment_id, value: @establishment.id %>
+  </div>
+  <div><%= f.submit 'Enviar' %></div>
+<% end %>

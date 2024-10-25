@@ -1,0 +1,13 @@
+<h1>Bebida</h1>
+
+<div>
+  <%= link_to 'Editar Bebida', edit_drink_path(@drink) %>
+</div>
+<dl>
+  <dt>Nome:</dt>
+  <dd><%= @drink.name %></dd>
+  <dt>Descrição:</dt>
+  <dd><%= @drink.description %></dd>
+  <dt>Calorias:</dt>
+  <dd><%= @drink.calories %></dd>
+</dl>
