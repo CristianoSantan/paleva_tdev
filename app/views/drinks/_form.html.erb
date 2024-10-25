@@ -8,8 +8,15 @@
     <%= f.text_field :description %>
   </div>
   <div>
+    <%= f.check_box :alcoholic %>
+    <%= f.label :alcoholic %>
+  </div>
+  <div>
     <%= f.label :calories %>
     <%= f.text_field :calories %>
+  </div>
+  <div>
+    <%= f.hidden_field :establishment_id, value: @establishment.id %>
   </div>
   <div><%= f.submit 'Enviar' %></div>
 <% end %>

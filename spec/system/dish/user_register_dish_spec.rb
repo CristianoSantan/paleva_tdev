@@ -18,7 +18,7 @@ describe "Usuário cadastra pratos" do
     click_on "Enviar"
 
     expect(page).to have_content 'Prato cadastrado com sucesso.'
-    expect(page).to have_content 'tranbolho'
+    expect(page).to have_content 'Frango'
     dish = Dish.last
     expect(dish.name).to eq 'Frango'
   end

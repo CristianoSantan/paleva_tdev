@@ -10,18 +10,18 @@ class DrinksController < ApplicationController
 
 	def new
 		@drink = Drink.new()
+		@establishment = Establishment.find_by(user_id: current_user.id)
 	end
 
 	def create
 		@drink = Drink.new(drink_params)
 
-		if @Drink.save()
+		if @drink.save()
 			redirect_to root_path, notice: "Bebida cadastrada com sucesso."
 		else
-			flash.now[:notice] = "Bebida não cadastrada."
+			flash.now[:alert] = "Bebida não cadastrada."
 			render 'new'
 		end
-		
 	end
 
 	def edit; end
@@ -30,15 +30,10 @@ class DrinksController < ApplicationController
 		if @Drink.update(drink_params)
 		redirect_to drink_path(@Drink.id), notice: 'Bebida atualizada com sucesso'
 		else
-			flash.now[:notice] = 'Não foi possível atualizar a Bebida'
+			flash.now[:alert] = 'Não foi possível atualizar a Bebida'
 			render 'edit'
 		end
 	end
-
-	# def destroy
-	# 	@Drink.destroy
-	# 	redirect_to root_path, notice: 'Bebida removida com sucesso'
-	# end
 
 	private
 
@@ -47,6 +42,6 @@ class DrinksController < ApplicationController
 	end
 
 	def drink_params
-		params.require(:establishment).permit(:name, :description, :alcoholic, :calories, :establishment_id)
+		params.require(:drink).permit(:name, :description, :alcoholic, :calories, :establishment_id)
 	end
 end
