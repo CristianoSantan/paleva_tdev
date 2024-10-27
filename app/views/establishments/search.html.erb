@@ -1,0 +1,32 @@
+<h1>Resultados da Busca por: <%= @dish_or_drink %></h1>
+<p><%= @drinks.count %> <%= Drink.model_name.human(count: @drinks.count).downcase %> <%= t(:found, count: @drinks.count) %></p>
+<table>
+  <tr>
+    <th><%= Drink.human_attribute_name(:name) %>:</th>
+    <th><%= Drink.human_attribute_name(:description) %>:</th>
+    <th>Ações</th>
+  </tr>
+  <% @drinks.each do |drink| %>
+    <tr>
+      <td><%= drink.name %></td>
+      <td><%= drink.description %></td>
+      <td><%= link_to 'Detalhe', drink_path(drink.id) %> | <%= link_to 'Editar', edit_drink_path(drink.id) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= @dishes.count %> <%= Dish.model_name.human(count: @dishes.count).downcase %> <%= t(:found, count: @dishes.count) %></p>
+<table>
+  <tr>
+    <th><%= Dish.human_attribute_name(:name) %>:</th>
+    <th><%= Dish.human_attribute_name(:description) %>:</th>
+    <th>Ações</th>
+  </tr>
+  <% @dishes.each do |dish| %>
+    <tr>
+      <td><%= dish.name %></td>
+      <td><%= dish.description %></td>
+      <td><%= link_to 'Detalhe', dish_path(dish.id) %> | <%= link_to 'Editar', edit_dish_path(dish.id) %></td>
+    </tr>
+  <% end %>
+</table>

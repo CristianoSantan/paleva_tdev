@@ -4,10 +4,15 @@
   <%= link_to 'Editar Bebida', edit_drink_path(@drink) %>
 </div>
 <dl>
+  <% if @drink.image.attached? %>
+    <%= image_tag @drink.image, alt: "", title: "Prato", width: "200" %>
+  <% end %>
   <dt>Nome:</dt>
   <dd><%= @drink.name %></dd>
   <dt>Descrição:</dt>
   <dd><%= @drink.description %></dd>
   <dt>Calorias:</dt>
   <dd><%= @drink.calories %></dd>
+  <dt>Alcoólico:</dt>
+  <dd><%= @drink.alcoholic ? 'SIM' : 'NÃO' %></dd>
 </dl>

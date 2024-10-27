@@ -1,4 +1,8 @@
-<%= form_with(model: @drink) do |f| %>
+<%= form_with(model: @drink, local: true) do |f| %>
+  <div>
+    <%= f.label :image %>
+    <%= f.file_field :image %> 
+  </div>
   <div>
     <%= f.label :name %>
     <%= f.text_field :name %>

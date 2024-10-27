@@ -1,7 +1,9 @@
 pt-BR:
   activerecord:
     models:
-      drink: Bebida
+      drink:
+        one: Bebida
+        other: Bebidas
     attributes:
       drink:
         name: "Nome"

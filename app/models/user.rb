@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one :establishment
+
   validates :name, :cpf, presence: true
   validates :cpf, uniqueness: true
   validates :cpf, length: { is: 11 }

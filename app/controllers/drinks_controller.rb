@@ -1,16 +1,16 @@
 class DrinksController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show, :edit, :new]
-  before_action :set_drink, only: [:show, :edit, :update]
+  before_action :set_drink_and_check_user, only: [:show, :edit, :update]
 
   def index
-		@drinks = Drink.all
+		@drinks = current_user.establishment.drinks
 	end
 
   def show; end
 
 	def new
 		@drink = Drink.new()
-		@establishment = Establishment.find_by(user_id: current_user.id)
+		@establishment = current_user.establishment
 	end
 
 	def create
@@ -24,11 +24,13 @@ class DrinksController < ApplicationController
 		end
 	end
 
-	def edit; end
+	def edit
+		@establishment = current_user.establishment
+	end
 
 	def update
-		if @Drink.update(drink_params)
-		redirect_to drink_path(@Drink.id), notice: 'Bebida atualizada com sucesso'
+		if @drink.update(drink_params)
+		redirect_to drink_path(@drink.id), notice: 'Bebida atualizada com sucesso'
 		else
 			flash.now[:alert] = 'Não foi possível atualizar a Bebida'
 			render 'edit'
@@ -37,11 +39,18 @@ class DrinksController < ApplicationController
 
 	private
 
-	def set_drink
+	# def set_drink
+	# 	@drink = Drink.find(params[:id])
+	# end
+
+	def set_drink_and_check_user
 		@drink = Drink.find(params[:id])
+		if @drink.establishment.user != current_user
+				return redirect_to root_path, alert: 'Você não possui acesso a essa bebida.'
+		end
 	end
 
 	def drink_params
-		params.require(:drink).permit(:name, :description, :alcoholic, :calories, :establishment_id)
+		params.require(:drink).permit(:image, :name, :description, :alcoholic, :calories, :establishment_id)
 	end
 end

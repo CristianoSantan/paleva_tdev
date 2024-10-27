@@ -19,11 +19,17 @@
   </head>
 
   <body>
+    <%= link_to root_path do %>
+      <h1 class="link">PaLeva</h1>
+    <% end %>
+
     <nav class="container mx-auto">
-      <%= link_to root_path do %>
-        <h1 class="link">PaLeva</h1> |
-      <% end %>
       <% if user_signed_in? %>
+        <%= form_with url: search_establishments_path, method: :get do |f| %>
+          <%= f.label :query, 'Buscar Pratos ou Bebidas' %>
+          <%= f.text_field :query %>
+          <%= f.submit 'Buscar' %>
+        <% end %>
         <%= link_to 'Estabelecimento', establishment_path(current_user.id) %> |
         <%= current_user.email %> |
         <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
@@ -31,6 +37,7 @@
         <%= link_to 'Entrar', new_user_session_path %>
       <% end %>
     </nav>
+
     <main class="container mx-auto mt-28 px-5 flex">
       <div>
         <p class="notice"><%= notice %></p>
@@ -38,5 +45,6 @@
       </div>
       <%= yield %>
     </main>
+    
   </body>
 </html>

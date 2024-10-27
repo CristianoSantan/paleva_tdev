@@ -7,12 +7,11 @@
   <div>
     <h3><%= link_to dish.name, dish_path(dish.id) %></h3>
     <dl>
+      <% if dish.image.attached? %>
+        <%= image_tag dish.image, alt: "", title: "Prato", width: "200" %>
+      <% end %>
       <dt>Nome:</dt>
       <dd><%= dish.name %></dd>
-      <dt>Descrição:</dt>
-      <dd><%= dish.description %></dd>
-      <dt>Calorias:</dt>
-      <dd><%= dish.calories %></dd>
     </dl>
   </div>
 <% end %>

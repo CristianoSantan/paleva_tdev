@@ -4,6 +4,8 @@
   <%= link_to 'Editar Estabelecimento', edit_establishment_path(@establishment) %>
 </div>
 <dl>
+  <dt>Código:</dt>
+  <dd><%= @establishment.code %></dd>
   <dt>Nome fantasia:</dt>
   <dd><%= @establishment.brand_name %></dd>
   <dt>Nome da companhia:</dt>

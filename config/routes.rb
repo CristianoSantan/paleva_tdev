@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   root "home#index"
-  resources :establishments, only: [:show, :edit, :update, :new, :create]
+  resources :establishments, only: [:show, :edit, :update, :new, :create] do
+    get 'search', on: :collection
+  end
   resources :dishes, only: [:index, :show, :edit, :update, :new, :create]
   resources :drinks, only: [:index, :show, :edit, :update, :new, :create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -4,6 +4,9 @@
   <%= link_to 'Editar Prato', edit_dish_path(@dish) %>
 </div>
 <dl>
+  <% if @dish.image.attached? %>
+    <%= image_tag @dish.image, alt: "", title: "Prato", width: "200" %>
+  <% end %>
   <dt>Nome:</dt>
   <dd><%= @dish.name %></dd>
   <dt>Descrição:</dt>

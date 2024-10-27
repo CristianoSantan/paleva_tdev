@@ -1,16 +1,16 @@
 class DishesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show, :edit, :new, :create]
-  before_action :set_dish, only: [:show, :edit, :update]
+  before_action :set_dish_and_check_user, only: [:show, :edit, :update]
 
   def index
-		@dishes = Dish.all
+		@dishes = current_user.establishment.dishes
 	end
 
   def show; end
 
 	def new
 		@dish = Dish.new()
-		@establishment = Establishment.find_by(user_id: current_user.id)
+		@establishment = current_user.establishment
 	end
 
 	def create
@@ -19,18 +19,20 @@ class DishesController < ApplicationController
 		if @dish.save()
 			redirect_to dishes_path, notice: "Prato cadastrado com sucesso."
 		else
-			flash.now[:notice] = "Prato não cadastrado."
+			flash.now[:alert] = "Prato não cadastrado."
 			render 'new'
 		end
 	end
 
-	def edit; end
+	def edit
+		@establishment = current_user.establishment
+	end
 
 	def update
 		if @dish.update(dish_params)
 		redirect_to dish_path(@dish.id), notice: 'Prato atualizado com sucesso'
 		else
-			flash.now[:notice] = 'Não foi possível atualizar o Prato'
+			flash.now[:alert] = 'Não foi possível atualizar o Prato'
 			render 'edit'
 		end
 	end
@@ -42,11 +44,18 @@ class DishesController < ApplicationController
 
 	private
 
-	def set_dish
+	# def set_dish
+	# 	@dish = Dish.find(params[:id])
+	# end
+
+	def set_dish_and_check_user
 		@dish = Dish.find(params[:id])
+		if @dish.establishment.user != current_user
+				return redirect_to root_path, alert: 'Você não possui acesso a esse prato.'
+		end
 	end
 
 	def dish_params
-		params.require(:dish).permit(:name, :description, :calories, :establishment_id)
+		params.require(:dish).permit(:image, :name, :description, :calories, :establishment_id)
 	end
 end

@@ -1,10 +1,17 @@
 class EstablishmentsController < ApplicationController
   before_action :authenticate_user!, only: [:show, :edit, :new]
-  before_action :set_establishment, only: [:show, :edit, :update]
+  before_action :set_establishment_and_check_user, only: [:show, :edit, :update]
 
   # def index; end
 
   def show; end
+
+	def search
+    @dish_or_drink = params["query"]
+		query = "name LIKE ? OR description LIKE ?"
+    @drinks = current_user.establishment.drinks.where(query, "%#{@dish_or_drink}%", "%#{@dish_or_drink}%")
+    @dishes = current_user.establishment.dishes.where(query, "%#{@dish_or_drink}%", "%#{@dish_or_drink}%")
+  end
 
 	def new
 		@establishment = Establishment.new()
@@ -41,8 +48,11 @@ class EstablishmentsController < ApplicationController
 
 	private
 
-	def set_establishment
+	def set_establishment_and_check_user
 		@establishment = Establishment.find(params[:id])
+		if @establishment.user != current_user
+			return redirect_to root_path, alert: 'Você não possui acesso a esse estabelecimento.'
+		end
 	end
 
 	def establishment_params

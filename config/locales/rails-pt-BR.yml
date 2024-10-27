@@ -1,4 +1,7 @@
 pt-BR:
+  found:
+      one: "encontrado(a)"
+      other: "encontrados(as)"
   activerecord:
     errors:
       messages:

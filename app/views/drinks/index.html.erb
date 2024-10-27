@@ -7,12 +7,11 @@
   <div>
     <h3><%= link_to drink.name, drink_path(drink.id) %></h3>
     <dl>
+      <% if drink.image.attached? %>
+        <%= image_tag drink.image, alt: "", title: "Prato", width: "200" %>
+      <% end %>
       <dt>Nome:</dt>
       <dd><%= drink.name %></dd>
-      <dt>Descrição:</dt>
-      <dd><%= drink.description %></dd>
-      <dt>Calorias:</dt>
-      <dd><%= drink.calories %></dd>
     </dl>
   </div>
 <% end %>
