@@ -1,0 +1,19 @@
+pt-BR:
+  sunday: "domingo"
+  monday: "segunda-feira"
+  tuesday: "terça-feira"
+  wednesday: "quarta-feira"
+  thursday: "quinta-feira"
+  friday: "sexta-feira"
+  saturday: "sabádo"
+  activerecord:
+    models:
+      hours_operation: 
+        one: Horário de Funcionamento
+        other: Horários de Funcionamento
+    attributes:
+      hours_operation:
+        weekday: "Dia da Semana"
+        opening_time: "Abertura"
+        closing_time: "Fechamento"
+        closed: "Fechado"

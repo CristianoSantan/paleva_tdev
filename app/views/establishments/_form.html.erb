@@ -24,11 +24,7 @@
     <%= f.text_field :email %>
   </div>
   <div>
-    <%= f.label :code %>
-    <%= f.text_field :code %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
   </div>
-  <div>
-    <%= f.hidden_field :user_id, value: @user.id %>
-  </div>
-  <div><%= f.submit 'Criar estabelecimento' %></div>
+  <div><%= f.submit 'Enviar' %></div>
 <% end %>

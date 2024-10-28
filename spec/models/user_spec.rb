@@ -3,22 +3,26 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe "#valid?" do
     it "falso quando nome vazio" do
-      user = User.new(name: '', cpf: '12345678910', email: 'joao@email.com', password: 'password1234')
+      cpf = CPF.generate
+      user = User.new(name: '', cpf: cpf, email: 'joao@email.com', password: 'password1234')
       expect(user).not_to be_valid 
     end
 
     it "falso quando cpf vazio" do
+      cpf = CPF.generate
       user = User.new(name: 'João Silva', cpf: '', email: 'joao@email.com', password: 'password1234')
       expect(user).not_to be_valid 
     end
 
     it "falso quando email vazio" do
-      user = User.new(name: 'João Silva', cpf: '12345678910', email: '', password: 'password1234')
+      cpf = CPF.generate
+      user = User.new(name: 'João Silva', cpf: cpf, email: '', password: 'password1234')
       expect(user).not_to be_valid 
     end
 
     it "falso quando senha vazio" do
-      user = User.new(name: 'João Silva', cpf: '12345678910', email: 'joao@email.com', password: '')
+      cpf = CPF.generate
+      user = User.new(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: '')
       expect(user).not_to be_valid 
     end
 
@@ -63,6 +67,22 @@ RSpec.describe User, type: :model do
       expect(result.include?(:cpf)).to be true
       expect(result[:cpf]).to include 'já está em uso'
     end
+    it "email inválido" do
+      user = User.new(email: 'cris')
     
+      user.valid?
+      result = user.errors
+
+      expect(result.include?(:email)).to be true
+      expect(result[:email]).to include 'não é válido'
+    end
+    it "email válido" do
+      user = User.new(email: 'cris@email')
+      
+      user.valid?
+      result = user.errors
+
+      expect(result.include?(:email)).to be false
+    end
   end
 end

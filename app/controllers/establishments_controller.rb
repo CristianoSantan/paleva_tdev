@@ -2,9 +2,9 @@ class EstablishmentsController < ApplicationController
   before_action :authenticate_user!, only: [:show, :edit, :new]
   before_action :set_establishment_and_check_user, only: [:show, :edit, :update]
 
-  # def index; end
-
-  def show; end
+  def show
+		@hours_operations = current_user.establishment.hours_operations
+	end
 
 	def search
     @dish_or_drink = params["query"]
@@ -15,7 +15,6 @@ class EstablishmentsController < ApplicationController
 
 	def new
 		@establishment = Establishment.new()
-		@user = User.find(current_user.id)
 	end
 
 	def create
@@ -40,11 +39,6 @@ class EstablishmentsController < ApplicationController
 			render 'edit'
 		end
 	end
-
-	# def destroy
-	# 	@establishment.destroy
-	# 	redirect_to root_path, notice: 'Estabelecimento removido com sucesso'
-	# end
 
 	private
 

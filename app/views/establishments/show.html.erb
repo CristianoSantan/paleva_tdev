@@ -4,14 +4,22 @@
   <%= link_to 'Editar Estabelecimento', edit_establishment_path(@establishment) %>
 </div>
 <dl>
+  <dt>Dono do estabelecimento:</dt>
+  <dd><%= @establishment.user.name %> | <%= @establishment.user.email %></dd>
   <dt>Código:</dt>
   <dd><%= @establishment.code %></dd>
   <dt>Nome fantasia:</dt>
   <dd><%= @establishment.brand_name %></dd>
-  <dt>Nome da companhia:</dt>
+  <dt>Nome companhia:</dt>
   <dd><%= @establishment.company_name %></dd>
   <dt>CNPJ:</dt>
   <dd><%= @establishment.cnpj %></dd>
+  <dt>Endereço:</dt>
+  <dd><%= @establishment.full_address %></dd>
+  <dt>Telefone:</dt>
+  <dd><%= @establishment.phone %></dd>
+  <dt>E-mail:</dt>
+  <dd><%= @establishment.email %></dd>
 </dl>
 
 <div>
@@ -21,3 +29,33 @@
 <div>
   <%= link_to 'Bebidas', drinks_path %>
 </div>
+
+<div>
+  <%= link_to 'Cadastrar Horário', new_hours_operation_path %>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dia da semana</th>
+      <th>Abertura</th>
+      <th>Fechamento</th>
+      <th>Fechado</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  <% @hours_operations.each do |hour| %>
+  
+    <tr>
+      <td><%= I18n.translate(hour.weekday) %></td>
+      <td><%= hour.opening_time.strftime("%H:%M") %></td>
+      <td><%= hour.closing_time.strftime("%H:%M") %></td>
+      <td><%= hour.closed ? 'Fechado' : 'Aberto' %></td>
+      <td><%= link_to "editar", edit_hours_operation_path(hour.id) %></td>
+    </tr>
+    
+  <% end %>
+  </tbody>
+</table>

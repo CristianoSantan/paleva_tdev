@@ -10,7 +10,6 @@ class DrinksController < ApplicationController
 
 	def new
 		@drink = Drink.new()
-		@establishment = current_user.establishment
 	end
 
 	def create
@@ -24,9 +23,7 @@ class DrinksController < ApplicationController
 		end
 	end
 
-	def edit
-		@establishment = current_user.establishment
-	end
+	def edit;	end
 
 	def update
 		if @drink.update(drink_params)
@@ -38,10 +35,6 @@ class DrinksController < ApplicationController
 	end
 
 	private
-
-	# def set_drink
-	# 	@drink = Drink.find(params[:id])
-	# end
 
 	def set_drink_and_check_user
 		@drink = Drink.find(params[:id])

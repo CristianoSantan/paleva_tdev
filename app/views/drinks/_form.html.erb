@@ -20,7 +20,7 @@
     <%= f.text_field :calories %>
   </div>
   <div>
-    <%= f.hidden_field :establishment_id, value: @establishment.id %>
+    <%= f.hidden_field :establishment_id, value: current_user.establishment.id %>
   </div>
   <div><%= f.submit 'Enviar' %></div>
 <% end %>

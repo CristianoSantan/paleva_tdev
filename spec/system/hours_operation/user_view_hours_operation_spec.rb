@@ -1,20 +1,7 @@
 require 'rails_helper'
 
-describe "Usuário vê a página do estabelecimento" do
-  it "se estiver autenticado" do
-    cpf = CPF.generate
-    cnpj = CNPJ.generate
-    user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
-    establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
-      full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', 
-      user: user )
-
-    visit establishment_path(1)
-
-    expect(current_path).to eq new_user_session_path 
-  end
-
-  it "a partir do menu" do
+describe "Usuário vê as horas de funcionamento" do
+  it "e vê a tabela em estabelecimentos" do
     cpf = CPF.generate
     cnpj = CNPJ.generate
     user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
@@ -27,10 +14,28 @@ describe "Usuário vê a página do estabelecimento" do
       click_on 'Estabelecimento'
     end
 
-    expect(current_path).to eq establishment_path(user.id)
-    expect(page).to have_content 'Estabelecimento'
-    expect(page).to have_content "Código: #{establishment.code}"
-    expect(page).to have_link 'Pratos'
-    expect(page).to have_link 'Bebidas'
+    expect(page).to have_content 'Dia da semana'
+    expect(page).to have_content 'Abertura'
+    expect(page).to have_content 'Fechamento'
+    expect(page).to have_content 'Fechado'
+  end
+  
+  it "e ve os horarios" do
+    cpf = CPF.generate
+    cnpj = CNPJ.generate
+    user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
+    establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
+      full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', user: user )
+    hours_operations = HoursOperation.create!(establishment: establishment, weekday: :monday, 
+      opening_time: "18:00", closing_time: "22:00", closed: false)
+
+    login_as(user)
+    visit root_path
+    within('nav') do
+      click_on 'Estabelecimento'
+    end
+
+    expect(page).to have_content 'Dia da semana'
+    expect(page).to have_content 'segunda-feira'
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_26_183954) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_28_011049) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -74,6 +74,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_26_183954) do
     t.index ["user_id"], name: "index_establishments_on_user_id"
   end
 
+  create_table "hours_operations", force: :cascade do |t|
+    t.integer "establishment_id", default: 0, null: false
+    t.integer "weekday"
+    t.time "opening_time"
+    t.time "closing_time"
+    t.boolean "closed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_hours_operations_on_establishment_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -93,4 +104,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_26_183954) do
   add_foreign_key "dishes", "establishments"
   add_foreign_key "drinks", "establishments"
   add_foreign_key "establishments", "users"
+  add_foreign_key "hours_operations", "establishments"
 end

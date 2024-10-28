@@ -1,5 +1,5 @@
 class DishesController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :show, :edit, :new, :create]
+  before_action :authenticate_user!, only: [:index, :show, :edit, :update, :new, :create]
   before_action :set_dish_and_check_user, only: [:show, :edit, :update]
 
   def index
@@ -10,7 +10,6 @@ class DishesController < ApplicationController
 
 	def new
 		@dish = Dish.new()
-		@establishment = current_user.establishment
 	end
 
 	def create
@@ -24,9 +23,7 @@ class DishesController < ApplicationController
 		end
 	end
 
-	def edit
-		@establishment = current_user.establishment
-	end
+	def edit;	end
 
 	def update
 		if @dish.update(dish_params)
@@ -37,16 +34,7 @@ class DishesController < ApplicationController
 		end
 	end
 
-	# def destroy
-	# 	@dish.destroy
-	# 	redirect_to root_path, notice: 'Prato removido com sucesso'
-	# end
-
 	private
-
-	# def set_dish
-	# 	@dish = Dish.find(params[:id])
-	# end
 
 	def set_dish_and_check_user
 		@dish = Dish.find(params[:id])

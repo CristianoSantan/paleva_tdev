@@ -3,8 +3,12 @@ require 'rails_helper'
 describe "usuário se autentica" do
   it "com sucesso" do
     cpf = CPF.generate
-    User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
-    
+    cnpj = CNPJ.generate
+    user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
+    establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
+      full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', 
+      user: user )
+
     visit root_path
     click_on 'Entrar'
     within 'form' do

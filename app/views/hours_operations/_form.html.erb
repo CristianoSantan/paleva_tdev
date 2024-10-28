@@ -1,0 +1,22 @@
+<%= form_with(model: @hours_operation) do |f| %>
+  <div>
+    <%= f.label :weekday %>
+    <%= f.weekday_select :weekday, {index_as_value: true} %> 
+  </div>
+  <div>
+    <%= f.label :opening_time %>
+    <%= f.time_field :opening_time %>
+  </div>
+  <div>
+    <%= f.label :closing_time %>
+    <%= f.time_field :closing_time %>
+  </div>
+  <div>
+    <%= f.check_box :closed %>
+    <%= f.label :closed %>
+  </div>
+  <div>
+    <%= f.hidden_field :establishment_id, value: current_user.establishment.id %>
+  </div>
+  <div><%= f.submit 'Enviar' %></div>
+<% end %>
