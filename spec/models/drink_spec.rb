@@ -2,6 +2,17 @@ require 'rails_helper'
 
 RSpec.describe Drink, type: :model do
   describe "#Valid?" do
+    it "deve aceitar o upload de uma imagem" do
+      drink = Drink.new()
+
+      drink.image.attach(
+        io: File.open('./spec/fixtures/files/test_image.jpg'), 
+        filename: 'test_image.jpg', 
+        content_type: 'image/jpg'
+      )
+
+      expect(drink.image).to be_attached
+    end
     it "Nome não pode ser vazio" do
       drink = Drink.new(name: "")
 

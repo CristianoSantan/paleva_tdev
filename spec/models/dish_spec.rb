@@ -2,6 +2,18 @@ require 'rails_helper'
 
 RSpec.describe Dish, type: :model do
   describe "#Valid?" do
+    it "deve aceitar o upload de uma imagem" do
+      dish = Dish.new()
+
+      dish.image.attach(
+        io: File.open('./spec/fixtures/files/test_image.jpg'), 
+        filename: 'test_image.jpg', 
+        content_type: 'image/jpg'
+      )
+
+      expect(dish.image).to be_attached
+    end
+    
     it "Nome não pode ser vazio" do
       dish = Dish.new(name: "")
 
