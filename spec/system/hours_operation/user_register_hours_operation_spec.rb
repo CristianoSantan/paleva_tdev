@@ -40,6 +40,21 @@ describe "Usuário registra um horário" do
     expect(page).to have_content 'Horário cadastrado com sucesso.'
   end
   it "com dados incompletos" do
-    
+    cpf = CPF.generate
+    cnpj = CNPJ.generate
+    user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
+    establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
+      full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', user: user )
+
+    login_as(user)
+    visit root_path
+    click_on 'Estabelecimento'
+    click_on 'Cadastrar Horário'
+    # select '',	from: "Dia da Semana" 
+    fill_in "Abertura",	with: "" 
+    fill_in "Fechamento",	with: "" 
+    click_on 'Enviar'
+
+    expect(page).to have_content 'Horário não cadastrado.'
   end
 end

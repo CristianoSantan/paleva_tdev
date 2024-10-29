@@ -3,5 +3,5 @@ class Dish < ApplicationRecord
 
   has_one_attached :image
 
-  validates :name, :description, presence: true
+  validates :name, :description, :calories, presence: true
 end

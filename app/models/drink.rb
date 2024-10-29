@@ -3,5 +3,5 @@ class Drink < ApplicationRecord
 
   has_one_attached :image
 
-  validates :name, :description, :alcoholic, presence: true
+  validates :name, :description, :alcoholic, :calories, presence: true
 end

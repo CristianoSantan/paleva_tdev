@@ -5,25 +5,29 @@ RSpec.describe User, type: :model do
     it "falso quando nome vazio" do
       cpf = CPF.generate
       user = User.new(name: '', cpf: cpf, email: 'joao@email.com', password: 'password1234')
-      expect(user).not_to be_valid 
+      expect(user).not_to be_valid
+      expect(user.errors[:name]).to include("não pode ficar em branco")
     end
 
     it "falso quando cpf vazio" do
       cpf = CPF.generate
       user = User.new(name: 'João Silva', cpf: '', email: 'joao@email.com', password: 'password1234')
       expect(user).not_to be_valid 
+      expect(user.errors[:cpf]).to include("não pode ficar em branco")
     end
 
     it "falso quando email vazio" do
       cpf = CPF.generate
       user = User.new(name: 'João Silva', cpf: cpf, email: '', password: 'password1234')
       expect(user).not_to be_valid 
+      expect(user.errors[:email]).to include("não pode ficar em branco")
     end
-
+    
     it "falso quando senha vazio" do
       cpf = CPF.generate
       user = User.new(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: '')
       expect(user).not_to be_valid 
+      expect(user.errors[:password]).to include("não pode ficar em branco")
     end
 
     it "cpf não possui o tamanho esperado" do
@@ -67,6 +71,7 @@ RSpec.describe User, type: :model do
       expect(result.include?(:cpf)).to be true
       expect(result[:cpf]).to include 'já está em uso'
     end
+
     it "email inválido" do
       user = User.new(email: 'cris')
     
@@ -76,6 +81,7 @@ RSpec.describe User, type: :model do
       expect(result.include?(:email)).to be true
       expect(result[:email]).to include 'não é válido'
     end
+    
     it "email válido" do
       user = User.new(email: 'cris@email')
       
