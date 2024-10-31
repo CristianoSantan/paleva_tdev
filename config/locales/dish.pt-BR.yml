@@ -1,4 +1,6 @@
 pt-BR:
+  enabled: "Ativado"
+  disabled: "Desativado"
   activerecord:
     models:
       dish: 

@@ -13,4 +13,14 @@
   <dd><%= @dish.description %></dd>
   <dt>Calorias:</dt>
   <dd><%= @dish.calories %></dd>
+  <dt>Situação do Prato:</dt>
+  <dd><%= I18n.translate(@dish.status) %></dd>
 </dl>
+
+<div>
+  <% if @dish.enabled? %>
+    <%= button_to 'Desativar', disabled_dish_path(@dish.id) %>
+  <% else %>
+    <%= button_to 'Ativar', enabled_dish_path(@dish.id) %>
+  <% end %>
+</div>

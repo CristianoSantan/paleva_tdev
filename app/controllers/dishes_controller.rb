@@ -1,6 +1,6 @@
 class DishesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show, :edit, :update, :new, :create]
-  before_action :set_dish_and_check_user, only: [:show, :edit, :update]
+  before_action :set_dish_and_check_user, only: [:show, :edit, :update, :disabled, :enabled]
 
   def index
 		@dishes = current_user.establishment.dishes
@@ -32,6 +32,16 @@ class DishesController < ApplicationController
 			flash.now[:alert] = 'Não foi possível atualizar o Prato'
 			render 'edit'
 		end
+	end
+
+	def disabled
+		@dish.disabled!
+		redirect_to @dish
+	end
+	
+	def enabled
+		@dish.enabled!
+		redirect_to @dish
 	end
 
 	private

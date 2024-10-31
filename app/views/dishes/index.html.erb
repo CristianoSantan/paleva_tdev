@@ -4,7 +4,7 @@
   <%= link_to 'Cadastrar Prato', new_dish_path %>
 </div>
  <% @dishes.each do |dish| %>
-  <div>
+  <div id=<%= dom_id(dish) %>>
     <h3><%= link_to dish.name, dish_path(dish.id) %></h3>
     <dl>
       <% if dish.image.attached? %>
@@ -12,6 +12,8 @@
       <% end %>
       <dt>Nome:</dt>
       <dd><%= dish.name %></dd>
+      <dt>Situação do Prato:</dt>
+      <dd><%= I18n.translate(dish.status) %></dd>
     </dl>
   </div>
 <% end %>

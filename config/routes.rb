@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   resources :establishments, only: [:show, :edit, :update, :new, :create] do
     get 'search', on: :collection
   end
-  resources :dishes, only: [:index, :show, :edit, :update, :new, :create]
+  resources :dishes, only: [:index, :show, :edit, :update, :new, :create] do
+    post 'enabled', on: :member
+    post 'disabled', on: :member
+  end
   resources :drinks, only: [:index, :show, :edit, :update, :new, :create]
   resources :hours_operations, only: [:edit, :update, :new, :create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
