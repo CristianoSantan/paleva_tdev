@@ -4,14 +4,16 @@
   <%= link_to 'Cadastrar Bebida', new_drink_path %>
 </div>
  <% @drinks.each do |drink| %>
-  <div>
+  <div id=<%= dom_id(drink) %>>
     <h3><%= link_to drink.name, drink_path(drink.id) %></h3>
     <dl>
       <% if drink.image.attached? %>
-        <%= image_tag drink.image, alt: "", title: "Prato", width: "200" %>
+        <%= image_tag drink.image, alt: "", title: "Bebida", width: "200" %>
       <% end %>
       <dt>Nome:</dt>
       <dd><%= drink.name %></dd>
+      <dt>Situação da Bebida:</dt>
+      <dd><%= I18n.translate(drink.status) %></dd>
     </dl>
   </div>
 <% end %>

@@ -39,7 +39,7 @@ describe "Usuário ativa ou desativa o prato" do
     click_on 'Toscana'
     click_on 'Desativar'
 
-    expect(page).to have_content 'Situação do Prato: Desativado'
+    expect(page).to have_content 'Situação do Prato: Desativado(a)'
   end
 
   it "e ativa na página de detalhes" do
@@ -60,7 +60,7 @@ describe "Usuário ativa ou desativa o prato" do
     click_on 'Toscana'
     click_on 'Ativar'
 
-    expect(page).to have_content 'Situação do Prato: Ativado'
+    expect(page).to have_content 'Situação do Prato: Ativado(a)'
   end
 
   it "e vê a informação na lista" do
@@ -80,7 +80,7 @@ describe "Usuário ativa ou desativa o prato" do
     click_on 'Pratos'
 
     within("#dish_1") do
-      expect(page).to have_content 'Situação do Prato: Desativado'
+      expect(page).to have_content 'Situação do Prato: Desativado(a)'
     end
   end
 end

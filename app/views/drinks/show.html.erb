@@ -15,4 +15,14 @@
   <dd><%= @drink.calories %></dd>
   <dt>Alcoólico:</dt>
   <dd><%= @drink.alcoholic ? 'SIM' : 'NÃO' %></dd>
+  <dt>Situação da Bebida:</dt>
+  <dd><%= I18n.translate(@drink.status) %></dd>
 </dl>
+
+<div>
+  <% if @drink.enabled? %>
+    <%= button_to 'Desativar', disabled_drink_path(@drink.id) %>
+  <% else %>
+    <%= button_to 'Ativar', enabled_drink_path(@drink.id) %>
+  <% end %>
+</div>

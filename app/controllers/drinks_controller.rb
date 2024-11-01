@@ -1,6 +1,6 @@
 class DrinksController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show, :edit, :new]
-  before_action :set_drink_and_check_user, only: [:show, :edit, :update]
+  before_action :set_drink_and_check_user, only: [:show, :edit, :update, :disabled, :enabled]
 
   def index
 		@drinks = current_user.establishment.drinks
@@ -16,7 +16,7 @@ class DrinksController < ApplicationController
 		@drink = Drink.new(drink_params)
 
 		if @drink.save()
-			redirect_to root_path, notice: "Bebida cadastrada com sucesso."
+			redirect_to drinks_path, notice: "Bebida cadastrada com sucesso."
 		else
 			flash.now[:alert] = "Bebida não cadastrada."
 			render 'new'
@@ -32,6 +32,16 @@ class DrinksController < ApplicationController
 			flash.now[:alert] = 'Não foi possível atualizar a Bebida'
 			render 'edit'
 		end
+	end
+
+	def disabled
+		@drink.disabled!
+		redirect_to @drink
+	end
+	
+	def enabled
+		@drink.enabled!
+		redirect_to @drink
 	end
 
 	private

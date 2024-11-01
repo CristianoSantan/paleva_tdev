@@ -8,7 +8,10 @@ Rails.application.routes.draw do
     post 'enabled', on: :member
     post 'disabled', on: :member
   end
-  resources :drinks, only: [:index, :show, :edit, :update, :new, :create]
+  resources :drinks, only: [:index, :show, :edit, :update, :new, :create] do
+    post 'enabled', on: :member
+    post 'disabled', on: :member
+  end
   resources :hours_operations, only: [:edit, :update, :new, :create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
