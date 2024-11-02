@@ -24,3 +24,18 @@
     <%= button_to 'Ativar', enabled_dish_path(@dish.id) %>
   <% end %>
 </div>
+
+<div>
+  <h3>Porções</h3>
+  <dl>
+  <% @dish.portions.each do |portion| %>
+    <dt><%= portion.description %>:</dt>
+    <dd>R$ <%= portion.real %>,<%= portion.cent.to_s.rjust(2, '0') %></dd>
+    <%= link_to 'Editar Porção', edit_dish_portion_path(portion.id) %>
+  <% end %>
+  </dl>
+</div>
+
+<div>
+  <%= link_to 'Cadastrar Porção', new_dish_portion_path(dish_id: @dish.id) %>
+</div>

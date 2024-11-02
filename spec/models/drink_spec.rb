@@ -40,7 +40,16 @@ RSpec.describe Drink, type: :model do
       result = drink.errors
   
       expect(result.include?(:alcoholic)).to be true
-      expect(result[:alcoholic]).to include 'não pode ficar em branco'
+      expect(result[:alcoholic]).to include 'deve ser verdadeiro ou falso'
+    end
+
+    it "Atributo alcoholic false" do
+      drink = Drink.new(alcoholic: false)
+  
+      drink.valid?
+      result = drink.errors
+  
+      expect(result.include?(:alcoholic)).to be false
     end
   
     it "Calorias não podem ser vazias" do

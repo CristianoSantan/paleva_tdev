@@ -26,3 +26,14 @@
     <%= button_to 'Ativar', enabled_drink_path(@drink.id) %>
   <% end %>
 </div>
+
+
+<div>
+  <h3>Porções</h3>
+  <dl>
+  <% @drink.portions.each do |portion| %>
+    <dt><%= portion.description %>:</dt>
+    <dd>R$ <%= portion.real %>,<%= portion.cent.to_s.rjust(2, '0') %></dd>
+  <% end %>
+  </dl>
+</div>

@@ -1,0 +1,17 @@
+<%= form_with(model: [@dish, @portion]) do |f| %>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div>
+    <%= f.label :real %>
+    <%= f.number_field :real %>
+  </div>
+  <div>
+    <%= f.label :cent %>
+    <%= f.number_field :cent %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>
