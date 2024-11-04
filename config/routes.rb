@@ -5,21 +5,26 @@ Rails.application.routes.draw do
   resources :establishments, only: [:show, :edit, :update, :new, :create] do
     get 'search', on: :collection
   end
-
-  concern :portionable do
-    resources :portions, only: [:new, :create, :edit, :update]
-  end
-
+  
   concern :enabled_disabled do
     post 'enabled', on: :member
     post 'disabled', on: :member
+  end
+  
+  concern :portionable do
+    resources :portions, only: [:new, :create, :edit, :update]
   end
 
   concern :history do
     resources :price_histories, only: [:new, :create]
   end
 
-  resources :dishes, only: [:index, :show, :edit, :update, :new, :create], concerns: [:portionable, :enabled_disabled, :history]
+  concern :dish_tag do
+    resources :dish_tags, only: [:new, :create]
+  end
+
+  resources :tags, only: [:new, :create]
+  resources :dishes, only: [:index, :show, :edit, :update, :new, :create], concerns: [:portionable, :enabled_disabled, :history, :dish_tag]
   resources :drinks, only: [:index, :show, :edit, :update, :new, :create], concerns: [:portionable, :enabled_disabled, :history]
   resources :hours_operations, only: [:edit, :update, :new, :create]
   

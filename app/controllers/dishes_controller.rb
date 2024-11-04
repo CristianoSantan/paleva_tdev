@@ -8,10 +8,13 @@ class DishesController < ApplicationController
 
   def show
 		@portions = @dish.portions
+		@tags = @dish.tags
 	end
 
 	def new
 		@dish = Dish.new()
+		@tags = current_user.establishment.tags
+		@dish_tag = DishTag.new()
 	end
 
 	def create
@@ -25,9 +28,16 @@ class DishesController < ApplicationController
 		end
 	end
 
-	def edit;	end
+	def edit
+		@tags = current_user.establishment.tags
+		@dish_tag = DishTag.new()
+		@dish_tags = @dish.tags
+	end
 
 	def update
+
+		@dish_tags.save
+
 		if @dish.update(dish_params)
 		redirect_to dish_path(@dish.id), notice: 'Prato atualizado com sucesso'
 		else

@@ -18,5 +18,21 @@
   <div>
     <%= f.hidden_field :establishment_id, value: current_user.establishment.id %>
   </div>
+
+  <%= form_with(url: new_dish_dish_tag_path(dish_id: @dish.id)) do |form| %>
+      <div>
+        <%= form.hidden_field :dish_id, value: @dish.id %>
+      </div>
+      <div>
+        <%= form.label :tag_id %>
+        <%= form.collection_select(:tag_id, @tags, :id, :name) %>
+      </div>
+      <div><%= f.submit 'Enviar' %></div>
+  <% end %>
+  
+  <% @dish_tags.each do |tag| %>
+    <%= tag.tag.name %>
+  <% end %>
+  
   <div><%= f.submit 'Enviar' %></div>
 <% end %>

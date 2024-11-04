@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_04_102102) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_04_144804) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_102102) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "dish_tags", force: :cascade do |t|
+    t.integer "dish_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_dish_tags_on_dish_id"
+    t.index ["tag_id"], name: "index_dish_tags_on_tag_id"
   end
 
   create_table "dishes", force: :cascade do |t|
@@ -108,6 +117,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_102102) do
     t.index ["portion_id"], name: "index_price_histories_on_portion_id"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "establishment_id", default: 0, null: false
+    t.index ["establishment_id"], name: "index_tags_on_establishment_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -124,9 +141,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_102102) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "dish_tags", "dishes"
+  add_foreign_key "dish_tags", "tags"
   add_foreign_key "dishes", "establishments"
   add_foreign_key "drinks", "establishments"
   add_foreign_key "establishments", "users"
   add_foreign_key "hours_operations", "establishments"
   add_foreign_key "price_histories", "portions"
+  add_foreign_key "tags", "establishments"
 end

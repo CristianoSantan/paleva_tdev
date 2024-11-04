@@ -26,6 +26,17 @@
 </div>
 
 <div>
+<dl>
+  <dt><strong>Marcadores:</strong></dt>
+  <dd>
+    <% @tags.each do |tag| %>
+      <%= tag.name %>
+    <% end %>
+  </dd>
+</dl>
+</div>
+
+<div>
   <h3>Porções</h3>
   <dl>
   <% @dish.portions.each do |portion| %>

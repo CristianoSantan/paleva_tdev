@@ -31,6 +31,20 @@
 </div>
 
 <div>
+  <%= link_to 'Cadastrar Marcadores', new_tag_path %>
+</div>
+
+<dl>
+  <dt><strong>Marcadores:</strong></dt>
+  <dd>
+    <% @establishment.tags.each do |tag| %>
+      <%= tag.name %> | 
+    <% end %>
+  </dd>
+</dl>
+</div>
+
+<div>
   <%= link_to 'Cadastrar Horário', new_hours_operation_path %>
 </div>
 
