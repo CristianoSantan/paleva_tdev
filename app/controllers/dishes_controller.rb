@@ -6,7 +6,9 @@ class DishesController < ApplicationController
 		@dishes = current_user.establishment.dishes
 	end
 
-  def show; end
+  def show
+		@portions = @dish.portions
+	end
 
 	def new
 		@dish = Dish.new()

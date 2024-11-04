@@ -1,31 +1,33 @@
 class PortionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_portion_and_check_user, only: [:edit, :update]
+  before_action :set_portion, only: [:edit, :update]
+  before_action :set_dish_or_drink
 
   def new
-    @dish = Dish.find(params[:dish_id])
     @portion = Portion.new
   end
   
   def create
-    @dish = Dish.find(params[:dish_id])
-    
-    if @dish.portions.create(portion_params)
-      redirect_to @dish, notice: "Porção cadastrada com sucesso."
+    @portion = @dish_or_drink.portions.build(portion_params)
+    @price_history = PriceHistory.new(portion: @portion, real: @portion.real, cent: @portion.cent, last_update: DateTime.now)
+    @price_history.save
+
+    if @portion.save
+      redirect_to @dish_or_drink, notice: "Porção cadastrada com sucesso."
 		else
 			flash.now[:alert] = "Porção não cadastrada."
 			render 'new'
 		end
   end
 
-  def edit
-    @dish = Dish.find(params[:dish_id])
-  end
+  def edit; end
   
   def update
-    @dish = Dish.find(params[:dish_id])
 		if @portion.update(portion_params)
-      redirect_to @dish, notice: 'Porção editada com sucesso.'
+      @price_history = PriceHistory.new(portion: @portion, real: @portion.real, cent: @portion.cent, last_update: DateTime.now)
+      @price_history.save
+      
+      redirect_to @dish_or_drink, notice: 'Porção editada com sucesso.'
       else
         flash.now[:alert] = 'Não foi possível atualizar o Porção'
         render 'edit'
@@ -34,7 +36,11 @@ class PortionsController < ApplicationController
 
   private
 
-  def set_portion_and_check_user
+  def set_dish_or_drink
+    @dish_or_drink = params[:drink_id].nil? ? Dish.find(params[:dish_id]) : Drink.find(params[:drink_id])
+  end
+
+  def set_portion
     @portion = Portion.find(params[:id])
   end
 

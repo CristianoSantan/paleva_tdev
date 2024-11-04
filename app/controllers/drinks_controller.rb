@@ -6,7 +6,9 @@ class DrinksController < ApplicationController
 		@drinks = current_user.establishment.drinks
 	end
 
-  def show; end
+  def show
+		@portions = @drink.portions
+	end
 
 	def new
 		@drink = Drink.new()

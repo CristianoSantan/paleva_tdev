@@ -27,13 +27,42 @@
   <% end %>
 </div>
 
-
 <div>
   <h3>Porções</h3>
   <dl>
-  <% @drink.portions.each do |portion| %>
+   <% @drink.portions.each do |portion| %>
     <dt><%= portion.description %>:</dt>
     <dd>R$ <%= portion.real %>,<%= portion.cent.to_s.rjust(2, '0') %></dd>
+    <%= link_to 'Editar Porção', edit_drink_portion_path(drink_id: @drink.id, id: portion.id) %>
   <% end %>
   </dl>
 </div>
+<div>
+  <%= link_to 'Cadastrar Porção', new_drink_portion_path(drink_id: @drink.id) %>
+</div>
+
+<h3>Histórico de Preços</h3>
+
+<table id="price-histories">
+  <thead>
+    <tr>
+      <th>Porções</th>
+      <th>Preços</th>
+      <th>Última atualização</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  <% @portions.each do |portion| %>
+    <% portion.price_histories.each do |price| %>
+  
+      <tr>
+        <td><%= portion.description %></td>
+        <td><%= price.real %>,<%= portion.cent.to_s.rjust(2, '0') %></td>
+        <td><%= price.last_update %></td>
+      </tr>
+    
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
