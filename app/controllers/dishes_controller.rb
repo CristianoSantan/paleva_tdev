@@ -13,8 +13,8 @@ class DishesController < ApplicationController
 
 	def new
 		@dish = Dish.new()
+		@dish.tags.build
 		@tags = current_user.establishment.tags
-		@dish_tag = DishTag.new()
 	end
 
 	def create
@@ -29,17 +29,13 @@ class DishesController < ApplicationController
 	end
 
 	def edit
+		@dish.tags.build if @dish.tags.empty?
 		@tags = current_user.establishment.tags
-		@dish_tag = DishTag.new()
-		@dish_tags = @dish.tags
 	end
 
 	def update
-
-		@dish_tags.save
-
 		if @dish.update(dish_params)
-		redirect_to dish_path(@dish.id), notice: 'Prato atualizado com sucesso'
+			redirect_to @dish, notice: 'Prato atualizado com sucesso'
 		else
 			flash.now[:alert] = 'Não foi possível atualizar o Prato'
 			render 'edit'
@@ -66,6 +62,12 @@ class DishesController < ApplicationController
 	end
 
 	def dish_params
-		params.require(:dish).permit(:image, :name, :description, :calories, :establishment_id)
+		params.require(:dish).permit(
+			:image, 
+			:name, 
+			:description, 
+			:calories, 
+			:establishment_id, 
+			tags_attributes: [:id, :establishment_id, :name, :_destroy])
 	end
 end

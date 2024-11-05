@@ -19,20 +19,37 @@
     <%= f.hidden_field :establishment_id, value: current_user.establishment.id %>
   </div>
 
-  <%= form_with(url: new_dish_dish_tag_path(dish_id: @dish.id)) do |form| %>
-      <div>
-        <%= form.hidden_field :dish_id, value: @dish.id %>
+  <h3>Marcadores</h3>
+  <div id="tags-container">
+    <%= f.fields_for :tags do |tag_form| %>
+      <div class="tag-field">
+        <%= tag_form.text_field :name, placeholder: "Nome do marcador" %>
+        <%= tag_form.hidden_field :establishment_id, value: current_user.establishment.id %>
+        <%= tag_form.check_box :_destroy %>
+        <%= tag_form.label :_destroy, "Remover" %>
       </div>
-      <div>
-        <%= form.label :tag_id %>
-        <%= form.collection_select(:tag_id, @tags, :id, :name) %>
-      </div>
-      <div><%= f.submit 'Enviar' %></div>
-  <% end %>
+    <% end %>
+  </div>
   
-  <% @dish_tags.each do |tag| %>
-    <%= tag.tag.name %>
-  <% end %>
-  
+  <button type="button" onclick="addTag()">Adicionar mais uma tag</button>
+
   <div><%= f.submit 'Enviar' %></div>
 <% end %>
+
+<script>
+  function addTag() {
+    const tagsContainer = document.getElementById('tags-container');
+    
+    const newTagDiv = document.createElement('div');
+    newTagDiv.classList.add('tag-field');
+    
+    newTagDiv.innerHTML = `
+      <input type="text" name="dish[tags_attributes][][name]" placeholder="Nome do marcador">
+      <input type="hidden" name="dish[tags_attributes][][id]">
+      <input type="checkbox" name="dish[tags_attributes][][_destroy]">
+      <label>Remover</label>
+    `;
+    
+    tagsContainer.appendChild(newTagDiv);
+  }
+</script>
