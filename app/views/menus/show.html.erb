@@ -1,1 +1,18 @@
 <h1>Cardápio: <%= @menu.name %></h1>
+
+Pratos:
+
+<table>
+  <tr>
+    <% @items.each do |item| %>
+      <td>
+        <p><%= item.name %></p>
+        <% item.portions.each do |portion| %>
+          <p><%= portion.description %> - R$ <%= portion.real %>,<%= portion.cent.to_s.rjust(2, '0') %></p>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+</table>
+
+

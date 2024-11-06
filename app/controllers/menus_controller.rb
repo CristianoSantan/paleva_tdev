@@ -6,7 +6,12 @@ class MenusController < ApplicationController
     @establishment = current_user.establishment
   end
 
-  def show; end
+  def show
+    @dishes = @menu.dishes
+    @drinks = @menu.drinks
+
+    @items = @dishes + @drinks
+  end
   
   def new
     @menu = Menu.new

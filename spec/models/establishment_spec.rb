@@ -106,8 +106,8 @@ RSpec.describe Establishment, type: :model do
       user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
       establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
         full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', user: user )
-      
       duplicate_establishment = Establishment.new(code: establishment.code)
+      
       duplicate_establishment.valid?
       result = duplicate_establishment.errors
     

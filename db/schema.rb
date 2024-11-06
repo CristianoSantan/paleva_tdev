@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_06_115441) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_06_133607) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -96,6 +96,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_115441) do
     t.index ["establishment_id"], name: "index_hours_operations_on_establishment_id"
   end
 
+  create_table "menu_items", force: :cascade do |t|
+    t.integer "menu_id", null: false
+    t.string "menuable_type", null: false
+    t.integer "menuable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id"], name: "index_menu_items_on_menu_id"
+    t.index ["menuable_type", "menuable_id"], name: "index_menu_items_on_menuable"
+  end
+
   create_table "menus", force: :cascade do |t|
     t.string "name"
     t.integer "establishment_id", null: false
@@ -155,6 +165,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_115441) do
   add_foreign_key "drinks", "establishments"
   add_foreign_key "establishments", "users"
   add_foreign_key "hours_operations", "establishments"
+  add_foreign_key "menu_items", "menus"
   add_foreign_key "menus", "establishments"
   add_foreign_key "price_histories", "portions"
   add_foreign_key "tags", "establishments"

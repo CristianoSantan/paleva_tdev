@@ -11,7 +11,7 @@
   <tbody>
     <% @menus.each do |menu| %>
       <tr>
-        <td><%= menu.name %></td>
+        <td><%= link_to menu.name, menu_path(menu.id) %></td>
       </tr>
     <% end %>
   </tbody>

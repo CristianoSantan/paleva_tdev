@@ -4,6 +4,8 @@ class Dish < ApplicationRecord
   has_many :portions, as: :portionable
   has_many :dish_tags, dependent: :destroy
   has_many :tags, through: :dish_tags
+  has_many :menu_items, as: :menuable
+  
   accepts_nested_attributes_for :tags, allow_destroy: true
   
   enum :status, { :enabled => 0, :disabled => 5 }

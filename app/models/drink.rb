@@ -2,6 +2,8 @@ class Drink < ApplicationRecord
   belongs_to :establishment
   has_one_attached :image
   has_many :portions, as: :portionable
+  has_many :menu_items, as: :menuable
+  has_many :menus, through: :menu_items
   
   enum :status, { :enabled => 0, :disabled => 5 }
 
