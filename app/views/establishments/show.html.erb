@@ -30,10 +30,6 @@
   <%= link_to 'Bebidas', drinks_path %>
 </div>
 
-<div>
-  <%= link_to 'Cadastrar Marcadores', new_tag_path %>
-</div>
-
 <dl>
   <dt><strong>Marcadores:</strong></dt>
   <dd>
@@ -59,17 +55,14 @@
     </tr>
   </thead>
   <tbody>
-  
-  <% @hours_operations.each do |hour| %>
-  
-    <tr>
-      <td><%= I18n.translate(hour.weekday) %></td>
-      <td><%= hour.opening_time.strftime("%H:%M") %></td>
-      <td><%= hour.closing_time.strftime("%H:%M") %></td>
-      <td><%= hour.closed ? 'Fechado' : 'Aberto' %></td>
-      <td><%= link_to "editar", edit_hours_operation_path(hour.id) %></td>
-    </tr>
-    
-  <% end %>
+    <% @hours_operations.each do |hour| %>
+      <tr>
+        <td><%= I18n.translate(hour.weekday) %></td>
+        <td><%= hour.opening_time.strftime("%H:%M") %></td>
+        <td><%= hour.closing_time.strftime("%H:%M") %></td>
+        <td><%= hour.closed ? 'Fechado' : 'Aberto' %></td>
+        <td><%= link_to "editar", edit_hours_operation_path(hour.id) %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

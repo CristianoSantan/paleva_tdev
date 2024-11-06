@@ -4,9 +4,10 @@ class Establishment < ApplicationRecord
   has_many :drinks
   has_many :hours_operations
   has_many :tags
+  has_many :menus
 
   validates :brand_name, :company_name, :cnpj, :full_address, :phone, :email, :code, presence: true
-  validates :phone, length: {minimum:10, maximum:11}
+  validates :phone, length: { minimum:10, maximum:11 }
   validates :code, uniqueness: true
   validate :cnpj_valid
 

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :dish_tags, only: [:new, :create]
   end
 
+  resources :menus, only: [ :index, :new, :create, :show ]
   resources :tags, only: [:new, :create]
   resources :dishes, only: [:index, :show, :edit, :update, :new, :create], concerns: [:portionable, :enabled_disabled, :history, :dish_tag]
   resources :drinks, only: [:index, :show, :edit, :update, :new, :create], concerns: [:portionable, :enabled_disabled, :history]

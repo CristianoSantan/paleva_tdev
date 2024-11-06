@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_04_144804) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_06_115441) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -96,6 +96,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_144804) do
     t.index ["establishment_id"], name: "index_hours_operations_on_establishment_id"
   end
 
+  create_table "menus", force: :cascade do |t|
+    t.string "name"
+    t.integer "establishment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_menus_on_establishment_id"
+  end
+
   create_table "portions", force: :cascade do |t|
     t.string "portionable_type", null: false
     t.integer "portionable_id", null: false
@@ -147,6 +155,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_144804) do
   add_foreign_key "drinks", "establishments"
   add_foreign_key "establishments", "users"
   add_foreign_key "hours_operations", "establishments"
+  add_foreign_key "menus", "establishments"
   add_foreign_key "price_histories", "portions"
   add_foreign_key "tags", "establishments"
 end

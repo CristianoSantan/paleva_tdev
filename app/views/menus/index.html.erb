@@ -1,0 +1,18 @@
+<h1>Cardápios de <%= @establishment.brand_name %></h1>
+
+<%= link_to 'Cadastrar Cardápio', new_menu_path %>
+
+<table>
+  <thead>
+  <tr>
+    <th>Cardápio</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% @menus.each do |menu| %>
+      <tr>
+        <td><%= menu.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

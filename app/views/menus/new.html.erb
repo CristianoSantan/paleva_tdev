@@ -1,0 +1,10 @@
+<h1>Novo Cardápio</h1>
+
+<%= form_with(model: @menu) do |f| %>
+<div>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
+<%= f.hidden_field :establishment_id, value: current_user.establishment.id %>
+<%= f.submit 'Enviar' %>
+<% end %>
