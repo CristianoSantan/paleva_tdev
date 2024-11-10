@@ -31,8 +31,12 @@
           <%= f.submit 'Buscar' %>
         <% end %>
         <%= link_to 'Estabelecimento', establishment_path(current_user.id) %> |
+        <%= link_to 'Cardápio', menus_path(current_user.id) %> |
+        <%= link_to 'Pedidos', orders_path %> |
         <%= current_user.email %> |
         <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+        
+        <%= link_to 'Finalizar Pedido', new_order_path unless session[:order_items].blank? %>
       <% else %>
         <%= link_to 'Entrar', new_user_session_path %>
       <% end %>

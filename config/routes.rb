@@ -1,13 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  authenticated :user do
-    root "menus#index", as: :authenticated_root
-  end
-
-  unauthenticated do
-    root "home#index", as: :unauthenticated_root
-  end
+  root "home#index"
 
   resources :establishments, only: [:show, :edit, :update, :new, :create] do
     get 'search', on: :collection
@@ -23,11 +17,14 @@ Rails.application.routes.draw do
   concern :dish_tag do
     resources :dish_tags, only: [:new, :create]
   end
-
+  
   resources :menus, only: [:index, :new, :create, :show] do 
-    resources :menu_items, only: [:new, :create]
+    resources :menu_items, only: [:new, :create] do
+      resources :order_items, only: [:new, :create]
+    end
   end
-
+  
+  resources :orders, only: [:index, :new, :create, :show]
   resources :tags, only: [:new, :create]
   resources :dishes, only: [:index, :show, :edit, :update, :new, :create], concerns: [:routes, :dish_tag]
   resources :drinks, only: [:index, :show, :edit, :update, :new, :create], concerns: [:routes]

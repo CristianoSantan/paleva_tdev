@@ -1,6 +1,28 @@
 require 'rails_helper'
 
 describe "Usuário vê cardárpios" do
+  it "após logar" do
+    cpf = CPF.generate
+    cnpj = CNPJ.generate
+    user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
+    establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
+      full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', code: 'ABC123', user: user )
+    menu = Menu.create!(name: 'Café da Manhã', establishment: establishment)
+
+    visit root_path
+    click_on 'Entrar'
+    within 'form' do
+      fill_in "E-mail",	with: "joao@email.com" 
+      fill_in "Senha",	with: "password1234" 
+      click_on 'Entrar'
+    end
+
+    expect(page).to have_current_path menus_path
+    expect(page).to have_content 'Cardápios de pizzafire'
+    expect(page).to have_link 'Cadastrar Cardápio'
+    expect(page).to have_content 'Café da Manhã'
+  end
+
   it "em lista de cardárpios" do
     cpf = CPF.generate
     cnpj = CNPJ.generate

@@ -1,0 +1,18 @@
+<h1>Novo item do pedido</h1>
+
+<%= form_with(model: [@menu, @menu_item, @order_item]) do |f| %>
+<div>
+  <%= @menu_item.menuable.name %>
+  <%= f.hidden_field :orderable_id, value: @menu_item.id %>
+  <%= f.hidden_field :menu_id, value: @menu.id %>
+  <div>
+    <%= f.label :portion_id %>
+    <%= f.collection_select :portion_id, @portions, :id, :full_description %>
+  </div>
+  <div>
+    <%= f.label :note %>
+    <%= f.text_field :note %>
+  </div>
+  <%= f.submit 'Adicionar' %>
+</div>
+<% end %>

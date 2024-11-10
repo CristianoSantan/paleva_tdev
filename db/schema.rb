@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_06_133607) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_10_170226) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -114,6 +114,32 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_133607) do
     t.index ["establishment_id"], name: "index_menus_on_establishment_id"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.string "orderable_type", null: false
+    t.integer "orderable_id", null: false
+    t.integer "portion_id", null: false
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["orderable_type", "orderable_id"], name: "index_order_items_on_orderable"
+    t.index ["portion_id"], name: "index_order_items_on_portion_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "email"
+    t.string "cpf"
+    t.string "code"
+    t.integer "establishment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.index ["establishment_id"], name: "index_orders_on_establishment_id"
+  end
+
   create_table "portions", force: :cascade do |t|
     t.string "portionable_type", null: false
     t.integer "portionable_id", null: false
@@ -167,6 +193,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_133607) do
   add_foreign_key "hours_operations", "establishments"
   add_foreign_key "menu_items", "menus"
   add_foreign_key "menus", "establishments"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "portions"
+  add_foreign_key "orders", "establishments"
   add_foreign_key "price_histories", "portions"
   add_foreign_key "tags", "establishments"
 end

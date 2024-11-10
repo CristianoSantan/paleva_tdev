@@ -1,0 +1,19 @@
+<h1>Novo item do menu</h1>
+
+<%= form_with(model: [@menu, @menu_item]) do |f| %>
+  <% if @item == 'drink' %>
+    <div>
+      <%= f.label :menuable_id, 'Bebida' %>
+      <%= f.collection_select :menuable_id, @drinks, :id, :name %>
+    </div>
+  <% else %>
+    <div>
+      <%= f.label :menuable_id, 'Prato' %>
+      <%= f.collection_select :menuable_id, @dishes, :id, :name %>
+    </div>
+  <% end %>
+    <div>
+      <%= f.hidden_field :menu_id, value: @menu.id %>
+    </div>
+  <%= f.submit 'Enviar' %>
+<% end %>

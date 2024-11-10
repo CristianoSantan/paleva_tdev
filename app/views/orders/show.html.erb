@@ -1,0 +1,19 @@
+<h1>Pedido: <%= @order.code %></h1>
+
+
+<% @order.order_items.each_with_index do |item, index| %>
+  <div>
+  item: <%= index + 1 %>
+    <%= item.orderable.name %> | 
+    <%= item.portion.full_description %>
+  </div>
+<% end %>
+
+<div>
+  <p>Total: R$ <%= @order.total %></p>
+  <p>Nome: <%= @order.name %></p>
+  <p>E-mail: <%= @order.email %></p>
+  <p>Telefone: <%= @order.phone %></p>
+  <p>CPF: <%= @order.cpf %></p>
+  <p>Situação: <%= I18n.t(@order.status) %></p>
+</div>

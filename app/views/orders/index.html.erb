@@ -1,0 +1,6 @@
+<h1>Pedidos</h1>
+
+
+<% @orders.each do |order| %>
+  Pedido: <%= link_to order.code, order_path(order.id) %>
+<% end %>

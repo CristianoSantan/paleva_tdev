@@ -1,18 +1,18 @@
 <h1>Cardápio: <%= @menu.name %></h1>
+<%= link_to 'Adicionar Prato', new_menu_menu_item_path(menu_id: @menu.id, item: "dish") %>
+<%= link_to 'Adicionar Bebida', new_menu_menu_item_path(menu_id: @menu.id, item: "drink") %>
 
-Pratos:
-
-<table>
-  <tr>
-    <% @items.each do |item| %>
-      <td>
-        <p><%= item.name %></p>
-        <% item.portions.each do |portion| %>
-          <p><%= portion.description %> - R$ <%= portion.real %>,<%= portion.cent.to_s.rjust(2, '0') %></p>
-        <% end %>
-      </td>
+<% @menu_items.each do |item| %>
+  <div>
+    <p><%= item.menuable.name %></p>
+    <% item.menuable.portions.each do |portion| %>
+      <p><%= portion.description %> - R$ <%= portion.real %>,<%= portion.cent.to_s.rjust(2, '0') %></p>
     <% end %>
-  </tr>
-</table>
+  </div>
+  <div id=<%= dom_id(item) %>>
+    <%= link_to 'Adicionar Pedido', new_menu_menu_item_order_item_path(menu_item_id: item.id, menu_id: @menu.id) %>
+  </div>
+<% end %>
+
 
 

@@ -1,0 +1,19 @@
+pt-BR:
+  waiting: "Aguardando confirmação da cozinha"
+  in_preparation: "em preparação"
+  canceled: "cancelado"
+  ready: "pronto"
+  delivered: "entregue"
+  activerecord:
+    models:
+      order:
+        one: Pedido
+        other: Pedidos
+    attributes:
+      order:
+        name: "Nome Cliente"
+        phone: "Telefone"
+        email: "E-mail"
+        cpf: "CPF"
+        code: "Código"
+        status: "Situação"

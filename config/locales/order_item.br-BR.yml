@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      order_item: 
+        one: Item do Pedido
+        other: Itens do Pedido
+    attributes:
+      order_item:
+        order_id: "Pedido"
+        orderable: "Item"
+        portion_id: "Porção"
+        note: "Observações"

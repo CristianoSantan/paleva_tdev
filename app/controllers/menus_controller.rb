@@ -7,10 +7,9 @@ class MenusController < ApplicationController
   end
 
   def show
+    @menu_items = @menu.menu_items
     @dishes = @menu.dishes
     @drinks = @menu.drinks
-
-    @items = @dishes + @drinks
   end
   
   def new
