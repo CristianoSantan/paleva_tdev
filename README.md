@@ -39,10 +39,10 @@ PaLeva é uma solução completa para a gestão de restaurantes, permitindo o co
    rails db:create
    rails db:migrate
    ```
-   <!-- Se necessário, também é possível rodar as seeds para popular o banco com dados iniciais:
+   Também é possível rodar as seeds para popular o banco com dados iniciais:
    ```bash
     rails db:seed
-   ``` -->
+   ```
 
 4. **Execute o servidor**:
    ```bash
@@ -51,6 +51,12 @@ PaLeva é uma solução completa para a gestão de restaurantes, permitindo o co
 
 5. **Acesse a aplicação**:
    Abra seu navegador e acesse `http://localhost:3000` para ver o PaLeva em funcionamento.
+
+6. **Login no Sistema**:
+Para se logar com o usuário criado pelas seeds, use os seguintes dados:
+
+- Email: freddie@burgerqueen.com
+- Senha: password1234
 
 ## Uso Básico
 
