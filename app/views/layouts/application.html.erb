@@ -30,7 +30,7 @@
           <%= f.text_field :query %>
           <%= f.submit 'Buscar' %>
         <% end %>
-        <%= link_to 'Estabelecimento', establishment_path(current_establishment.id) unless current_establishment.nil? %> |
+        <%= link_to 'Estabelecimento', current_establishment unless current_establishment.nil? %> |
         <%= link_to 'Cardápio', menus_path() %> |
         <%= link_to 'Pedidos', orders_path %> |
         <%= link_to 'Pré-cadastros |', pre_registrations_path if user_signed_in? %> 

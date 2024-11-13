@@ -21,7 +21,7 @@ class DishesController < ApplicationController
 		@dish = Dish.new(dish_params)
 
 		if @dish.save()
-			redirect_to dishes_path, notice: "Prato cadastrado com sucesso."
+			redirect_to @dish, notice: "Prato cadastrado com sucesso."
 		else
 			flash.now[:alert] = "Prato não cadastrado."
 			render 'new'

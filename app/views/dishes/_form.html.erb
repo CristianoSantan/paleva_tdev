@@ -3,7 +3,7 @@
     <%= f.label :image %>
     <%= f.file_field :image %> 
   </div>
-  <div>
+  <div id="name_dish">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
@@ -23,6 +23,7 @@
   <div id="tags-container">
     <%= f.fields_for :tags do |tag_form| %>
       <div class="tag-field">
+        <%= tag_form.label :name, 'Marcador 1'%>
         <%= tag_form.text_field :name, placeholder: "Nome do marcador" %>
         <%= tag_form.hidden_field :establishment_id, value: current_establishment.id %>
         <%= tag_form.check_box :_destroy %>
@@ -37,17 +38,20 @@
 <% end %>
 
 <script>
+  var index = 0;
   function addTag() {
     const tagsContainer = document.getElementById('tags-container');
-    
+    index = index + 1;
     const newTagDiv = document.createElement('div');
     newTagDiv.classList.add('tag-field');
     
     newTagDiv.innerHTML = `
-      <input type="text" name="dish[tags_attributes][][name]" placeholder="Nome do marcador">
-      <input type="hidden" name="dish[tags_attributes][][id]">
-      <input type="checkbox" name="dish[tags_attributes][][_destroy]">
-      <label>Remover</label>
+      <label for="dish_tags_attributes_${index}_name">Marcador ${index + 1}</label>
+      <input type="text" name="dish[tags_attributes][${index}][name]" 
+        id="dish_tags_attributes_${index}_name" placeholder="Nome do marcador">
+      <input type="hidden" name="dish[tags_attributes][${index}][id]">
+      <input type="checkbox" name="dish[tags_attributes][${index}][_destroy]" id="dish_tags_attributes_${index}__destroy">
+      <label for="dish_tags_attributes_${index}__destroy">Remover</label>
     `;
     
     tagsContainer.appendChild(newTagDiv);

@@ -1,6 +1,4 @@
 
----
-
 # PaLeva - Gestão de Restaurantes
 
 PaLeva é uma solução completa para a gestão de restaurantes, permitindo o controle de cardápios, pratos, bebidas, pedidos e muito mais. Com uma interface amigável e recursos que facilitam o dia a dia dos estabelecimentos, PaLeva permite que você foque no essencial: entregar uma experiência de qualidade aos seus clientes.
@@ -17,8 +15,7 @@ PaLeva é uma solução completa para a gestão de restaurantes, permitindo o co
 
 - **Ruby 3.1+**
 - **Rails 7.2.1+**
-- **SQLite** (ou um banco de dados de sua escolha)
-- **Node.js** e **Yarn** para gerenciamento de pacotes de JavaScript
+- **SQLite** 
 
 ## Instalação
 
@@ -53,7 +50,7 @@ PaLeva é uma solução completa para a gestão de restaurantes, permitindo o co
    Abra seu navegador e acesse `http://localhost:3000` para ver o PaLeva em funcionamento.
 
 6. **Login no Sistema**:
-Para se logar com o usuário criado pelas seeds, use os seguintes dados:
+   Para se logar com o usuário criado pelas seeds, use os seguintes dados:
 
 - Email: freddie@burgerqueen.com
 - Senha: password1234
