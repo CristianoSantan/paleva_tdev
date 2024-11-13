@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :employees, controllers: { registrations: 'employees/registrations' }
   devise_for :users
 
   root "home#index"
@@ -24,9 +25,10 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :orders, only: [:index, :new, :create, :show]
-  resources :tags, only: [:new, :create]
   resources :dishes, only: [:index, :show, :edit, :update, :new, :create], concerns: [:routes, :dish_tag]
   resources :drinks, only: [:index, :show, :edit, :update, :new, :create], concerns: [:routes]
   resources :hours_operations, only: [:edit, :update, :new, :create]
+  resources :orders, only: [:index, :new, :create, :show]
+  resources :pre_registrations, only: [:index, :new, :create]
+  resources :tags, only: [:new, :create]
 end

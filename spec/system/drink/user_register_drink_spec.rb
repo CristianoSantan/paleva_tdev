@@ -9,7 +9,7 @@ describe "Usuário cadastra bebidas" do
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', 
       code: 'ABC123', user: user )
   
-    login_as(user)
+      login_as(user, scope: :user)
     visit drinks_path
     click_on 'Cadastrar Bebida'
     fill_in "Nome",	with: "Caipirinha" 

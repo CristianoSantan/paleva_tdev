@@ -11,7 +11,7 @@ describe "Usuário vê historico de preços" do
     portion_1 = Portion.create!(description: 'Porção Pequena', real: 20, cent: 0, portionable: dish)
     portion_2 = Portion.create!(description: 'Porção Grande', real: 35, cent: 0, portionable: dish)
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'
@@ -32,7 +32,7 @@ describe "Usuário vê historico de preços" do
     portion_1 = Portion.create!(description: 'Porção Pequena', real: 20, cent: 0, portionable: dish)
     price_history = PriceHistory.create!(portion:portion_1, real:portion_1.real, cent:portion_1.cent, last_update: DateTime.now)
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'

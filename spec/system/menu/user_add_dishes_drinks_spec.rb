@@ -16,7 +16,7 @@ describe "Usuário adiciona pratos e bebidas em um cardápio" do
     portion_drink_1 = Portion.create!(description: 'Copo [250ml]', real: 4, cent: 0, portionable: drink)
     portion_drink_2 = Portion.create!(description: 'Jarra [1litro]', real: 8, cent: 0, portionable: drink)
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit menus_path
     click_on 'Café da Manhã'
 
@@ -39,7 +39,7 @@ describe "Usuário adiciona pratos e bebidas em um cardápio" do
     portion_drink_1 = Portion.create!(description: 'Copo [250ml]', real: 4, cent: 0, portionable: drink)
     portion_drink_2 = Portion.create!(description: 'Jarra [1litro]', real: 8, cent: 0, portionable: drink)
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit menus_path
     click_on 'Café da Manhã'
     click_on 'Adicionar Prato'

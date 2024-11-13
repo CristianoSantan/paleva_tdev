@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :order_params, only: [:create ]
+  before_action :authenticated
 
   def index
     @orders = Order.all

@@ -19,4 +19,16 @@ class ApplicationController < ActionController::Base
       redirect_to new_establishment_path, alert: "Por favor, cadastre seu estabelecimento antes de continuar."
     end
   end
+
+  def authenticated
+    employee_signed_in? ? authenticate_employee! : authenticate_user!
+  end
+
+  def current_account 
+    user_signed_in? ? current_user : current_employee
+  end
+  
+  def current_establishment 
+    user_signed_in? ? current_user.establishment : current_employee.establishment
+  end
 end

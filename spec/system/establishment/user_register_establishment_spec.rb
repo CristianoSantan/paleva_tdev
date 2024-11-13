@@ -5,7 +5,7 @@ describe "Usuário cadastra seu estabelecimento" do
     cpf = CPF.generate
     user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit new_establishment_path
     
     expect(page).to have_content 'Novo Estabelecimento'
@@ -22,7 +22,7 @@ describe "Usuário cadastra seu estabelecimento" do
     cnpj = CNPJ.generate
     user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit new_establishment_path
     fill_in "Nome fantasia",	with: "pizzafire"
     fill_in "Nome companhia",	with: "pizzafire restaurantes"
@@ -41,7 +41,7 @@ describe "Usuário cadastra seu estabelecimento" do
     cpf = CPF.generate
     user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit new_establishment_path
     fill_in "Nome fantasia",	with: ""
     fill_in "Nome companhia",	with: ""

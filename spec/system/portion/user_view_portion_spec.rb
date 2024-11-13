@@ -11,7 +11,7 @@ describe "Usuário ve as porções" do
     portion_1 = Portion.create!(description: 'Porção Pequena', real: 20, cent: 0, portionable: dish)
     portion_2 = Portion.create!(description: 'Porção Grande', real: 35, cent: 0, portionable: dish)
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'
@@ -37,7 +37,7 @@ describe "Usuário ve as porções" do
     portion_2 = Portion.create!(description: 'Garrafa (600ml)', real: 9, cent: 0, portionable: drink)
     portion_3 = Portion.create!(description: 'Garrafa (1 litro)', real: 12, cent: 0, portionable: drink)
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'

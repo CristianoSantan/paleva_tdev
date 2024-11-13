@@ -29,7 +29,7 @@
       <%= f.label :cpf %>
       <%= f.text_field :cpf %>
     </div>
-    <%= f.hidden_field :establishment_id, value: current_user.establishment.id %>
+    <%= f.hidden_field :establishment_id, value: current_establishment.id %>
     <div><%= f.submit 'Enviar' %></div>
   <% end %>
 <% else %>

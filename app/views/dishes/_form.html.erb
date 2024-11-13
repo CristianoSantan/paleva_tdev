@@ -16,7 +16,7 @@
     <%= f.text_field :calories %>
   </div>
   <div>
-    <%= f.hidden_field :establishment_id, value: current_user.establishment.id %>
+    <%= f.hidden_field :establishment_id, value: current_establishment.id %>
   </div>
 
   <h3>Marcadores</h3>
@@ -24,7 +24,7 @@
     <%= f.fields_for :tags do |tag_form| %>
       <div class="tag-field">
         <%= tag_form.text_field :name, placeholder: "Nome do marcador" %>
-        <%= tag_form.hidden_field :establishment_id, value: current_user.establishment.id %>
+        <%= tag_form.hidden_field :establishment_id, value: current_establishment.id %>
         <%= tag_form.check_box :_destroy %>
         <%= tag_form.label :_destroy, "Remover" %>
       </div>

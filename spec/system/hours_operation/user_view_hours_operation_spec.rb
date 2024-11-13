@@ -8,7 +8,7 @@ describe "Usuário vê as horas de funcionamento" do
     establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', user: user )
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'
@@ -29,7 +29,7 @@ describe "Usuário vê as horas de funcionamento" do
     hours_operations = HoursOperation.create!(establishment: establishment, weekday: :monday, 
       opening_time: "18:00", closing_time: "22:00", closed: false)
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'

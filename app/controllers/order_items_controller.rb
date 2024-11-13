@@ -1,4 +1,5 @@
 class OrderItemsController < ApplicationController
+  before_action :authenticated
 
   def new
     @order_item = OrderItem.new

@@ -2,10 +2,8 @@ require 'rails_helper'
 
 describe "Usuário vê a página do estabelecimento" do
   it "se estiver autenticado" do
-    cpf = CPF.generate
-    cnpj = CNPJ.generate
-    user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
-    establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
+    user = User.create!(name: 'João Silva', cpf: CPF.generate, email: 'joao@email.com', password: 'password1234')
+    establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: CNPJ.generate,
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', 
       user: user )
 
@@ -21,7 +19,7 @@ describe "Usuário vê a página do estabelecimento" do
     establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', user: user )
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'

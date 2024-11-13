@@ -2,15 +2,13 @@ require 'rails_helper'
 
 describe "Usuário ativa ou desativa o prato" do
   it "e vê o botão de desativar na página de detalhes" do
-    cpf = CPF.generate
-    cnpj = CNPJ.generate
-    user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
-    establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
+    user = User.create!(name: 'João Silva', cpf: CPF.generate, email: 'joao@email.com', password: 'password1234')
+    establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: CNPJ.generate,
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', 
       code: 'ABC123', user: user )
     dish = Dish.create!(name: 'Toscana', description: 'Mussarales, calabresa e cebola', calories: 300, establishment: establishment, status: 'enabled')
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'
@@ -30,7 +28,7 @@ describe "Usuário ativa ou desativa o prato" do
       code: 'ABC123', user: user )
     dish = Dish.create!(name: 'Toscana', description: 'Mussarales, calabresa e cebola', calories: 300, establishment: establishment, status: 'enabled')
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'
@@ -51,7 +49,7 @@ describe "Usuário ativa ou desativa o prato" do
       code: 'ABC123', user: user )
     dish = Dish.create!(name: 'Toscana', description: 'Mussarales, calabresa e cebola', calories: 300, establishment: establishment, status: 'disabled')
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'
@@ -72,7 +70,7 @@ describe "Usuário ativa ou desativa o prato" do
       code: 'ABC123', user: user )
     dish = Dish.create!(name: 'Toscana', description: 'Mussarales, calabresa e cebola', calories: 300, establishment: establishment, status: 'disabled')
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_10_170226) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_12_210207) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -69,6 +69,22 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_10_170226) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
     t.index ["establishment_id"], name: "index_drinks_on_establishment_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "name"
+    t.string "cpf"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "establishment_id", null: false
+    t.index ["email"], name: "index_employees_on_email", unique: true
+    t.index ["establishment_id"], name: "index_employees_on_establishment_id"
+    t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
   create_table "establishments", force: :cascade do |t|
@@ -151,6 +167,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_10_170226) do
     t.index ["portionable_type", "portionable_id"], name: "index_portions_on_portionable"
   end
 
+  create_table "pre_registrations", force: :cascade do |t|
+    t.string "email"
+    t.string "cpf"
+    t.boolean "used", default: false
+    t.integer "establishment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_pre_registrations_on_establishment_id"
+  end
+
   create_table "price_histories", force: :cascade do |t|
     t.integer "portion_id", null: false
     t.integer "real"
@@ -179,6 +205,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_10_170226) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "establishment_id"
+    t.integer "role", default: 1
+    t.boolean "pre_registered", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -189,6 +218,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_10_170226) do
   add_foreign_key "dish_tags", "tags"
   add_foreign_key "dishes", "establishments"
   add_foreign_key "drinks", "establishments"
+  add_foreign_key "employees", "establishments"
   add_foreign_key "establishments", "users"
   add_foreign_key "hours_operations", "establishments"
   add_foreign_key "menu_items", "menus"
@@ -196,6 +226,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_10_170226) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "portions"
   add_foreign_key "orders", "establishments"
+  add_foreign_key "pre_registrations", "establishments"
   add_foreign_key "price_histories", "portions"
   add_foreign_key "tags", "establishments"
 end

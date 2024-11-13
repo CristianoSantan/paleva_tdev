@@ -10,7 +10,7 @@ describe "Usuário ativa ou desativa o bebida" do
       code: 'ABC123', user: user )
     drink = Drink.create!(name: 'Coca-Cola', description: 'Refrigerante', calories: 180, establishment: establishment, alcoholic: true, status: 'enabled')
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'
@@ -31,7 +31,7 @@ describe "Usuário ativa ou desativa o bebida" do
       code: 'ABC123', user: user )
     drink = Drink.create!(name: 'Coca-Cola', description: 'Refrigerante', calories: 180, establishment: establishment, alcoholic: true, status: 'enabled')
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'
@@ -52,7 +52,7 @@ describe "Usuário ativa ou desativa o bebida" do
       code: 'ABC123', user: user )
     drink = Drink.create!(name: 'Coca-Cola', description: 'Refrigerante', calories: 180, establishment: establishment, alcoholic: true, status: 'disabled')
   
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'
@@ -73,7 +73,7 @@ describe "Usuário ativa ou desativa o bebida" do
       code: 'ABC123', user: user )
     drink = Drink.create!(name: 'Coca-Cola', description: 'Refrigerante', calories: 180, establishment: establishment, alcoholic: true, status: 'disabled')
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'

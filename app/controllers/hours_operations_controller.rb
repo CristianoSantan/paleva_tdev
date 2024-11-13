@@ -10,7 +10,7 @@ class HoursOperationsController < ApplicationController
     @hours_operation = HoursOperation.new(hours_operation_params)
     
 		if @hours_operation.save()
-			redirect_to establishment_path(current_user.establishment.id), notice: "Horário cadastrado com sucesso."
+			redirect_to establishment_path(current_establishment.id), notice: "Horário cadastrado com sucesso."
 		else
 			flash.now[:alert] = "Horário não cadastrado."
 			render 'new'
@@ -21,7 +21,7 @@ class HoursOperationsController < ApplicationController
 
   def update
 		if @hours_operation.update(hours_operation_params)
-		redirect_to establishment_path(current_user.establishment.id), notice: 'horário atualizado com sucesso'
+		redirect_to establishment_path(current_establishment.id), notice: 'horário atualizado com sucesso'
 		else
 			flash.now[:alert] = 'Não foi possível atualizar a horário'
 			render 'edit'
@@ -32,7 +32,7 @@ class HoursOperationsController < ApplicationController
 
   def set_hour_and_check_user
 		@hours_operation = HoursOperation.find(params[:id])
-		if @hours_operation.establishment.user != current_user
+		if @hours_operation.establishment.id != current_establishment.id
 				return redirect_to root_path, alert: 'Você não possui acesso a esse horário.'
 		end
 	end

@@ -1,9 +1,10 @@
 class MenusController < ApplicationController
-  before_action :set_menu, only: [:show]
+  before_action :authenticated, only: [:index, :show]
+  before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_menu_and_check_user, only: [:show]
 
   def index
     @menus = Menu.all
-    @establishment = current_user.establishment
   end
 
   def show
@@ -29,8 +30,11 @@ class MenusController < ApplicationController
 
   private
 
-  def set_menu
+  def set_menu_and_check_user
     @menu = Menu.find(params[:id])
+    if @menu.establishment.id != current_establishment.id
+      return redirect_to root_path, alert: 'Você não possui acesso a essa bebida.'
+    end
   end
 
   def menu_params

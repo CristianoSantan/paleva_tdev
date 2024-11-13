@@ -21,7 +21,7 @@ describe "Usuário registra um pedido" do
     MenuItem.create!(menu: menu, menuable:dish2)
     MenuItem.create!(menu: menu, menuable:drink)
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit menus_path
     click_on 'Café da Manhã'
 
@@ -53,7 +53,7 @@ describe "Usuário registra um pedido" do
     MenuItem.create!(menu: menu, menuable:dish2)
     MenuItem.create!(menu: menu, menuable:drink)
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit menus_path
     click_on 'Café da Manhã'
     within("#menu_item_1") do
@@ -90,7 +90,7 @@ describe "Usuário registra um pedido" do
     order_item = OrderItem.create!(order: order, orderable:dish, portion: portion_dish_1, note: 'sem cebola')
     order_item = OrderItem.create!(order: order, orderable:drink, portion: portion_drink_1, note: 'com gelo')
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit menus_path
     click_on 'Café da Manhã'
     within("#menu_item_1") do

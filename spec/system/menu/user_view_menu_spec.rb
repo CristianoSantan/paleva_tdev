@@ -10,7 +10,7 @@ describe "Usuário vê cardárpios" do
     menu = Menu.create!(name: 'Café da Manhã', establishment: establishment)
 
     visit root_path
-    click_on 'Entrar'
+    click_on 'Dono'
     within 'form' do
       fill_in "E-mail",	with: "joao@email.com" 
       fill_in "Senha",	with: "password1234" 
@@ -31,7 +31,7 @@ describe "Usuário vê cardárpios" do
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', code: 'ABC123', user: user )
     menu = Menu.create!(name: 'Café da Manhã', establishment: establishment)
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit menus_path
 
     expect(current_path).to eq menus_path
@@ -59,7 +59,7 @@ describe "Usuário vê cardárpios" do
     MenuItem.create!(menu: menu, menuable:dish)
     MenuItem.create!(menu: menu, menuable:drink)
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit menus_path
     click_on 'Café da Manhã'
 

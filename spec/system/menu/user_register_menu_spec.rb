@@ -8,7 +8,7 @@ describe "Usuário cadastra um menu" do
     establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', code: 'ABC123', user: user )
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit menus_path
     click_on 'Cadastrar Cardápio'
 
@@ -25,7 +25,7 @@ describe "Usuário cadastra um menu" do
     establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', code: 'ABC123', user: user )
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit menus_path
     click_on 'Cadastrar Cardápio'
     fill_in "Nome do Cardápio",	with: "Café da Manhã" 
@@ -45,7 +45,7 @@ describe "Usuário cadastra um menu" do
     establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', code: 'ABC123', user: user )
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit menus_path
     click_on 'Cadastrar Cardápio'
     fill_in "Nome do Cardápio",	with: "" 

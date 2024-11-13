@@ -1,4 +1,5 @@
 class MenuItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :new]
 
   def new
     @menu_item = MenuItem.new

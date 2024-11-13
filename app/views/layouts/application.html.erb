@@ -24,21 +24,23 @@
     <% end %>
 
     <nav class="container mx-auto">
-      <% if user_signed_in? %>
+      <% if user_signed_in? || employee_signed_in? %>
         <%= form_with url: search_establishments_path, method: :get do |f| %>
           <%= f.label :query, 'Buscar Pratos ou Bebidas' %>
           <%= f.text_field :query %>
           <%= f.submit 'Buscar' %>
         <% end %>
-        <%= link_to 'Estabelecimento', establishment_path(current_user.id) %> |
-        <%= link_to 'Cardápio', menus_path(current_user.id) %> |
+        <%= link_to 'Estabelecimento', establishment_path(current_establishment.id) unless current_establishment.nil? %> |
+        <%= link_to 'Cardápio', menus_path() %> |
         <%= link_to 'Pedidos', orders_path %> |
-        <%= current_user.email %> |
-        <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
-        
+        <%= link_to 'Pré-cadastros |', pre_registrations_path if user_signed_in? %> 
+        <%= current_account.email %> |
+        <%= button_to 'Sair', user_signed_in? ? destroy_user_session_path : destroy_employee_session_path, method: :delete %>
+  
         <%= link_to 'Finalizar Pedido', new_order_path unless session[:order_items].blank? %>
       <% else %>
-        <%= link_to 'Entrar', new_user_session_path %>
+        <%= link_to 'Dono', new_user_session_path %>
+        <%= link_to 'Funcionário', new_employee_session_path %>
       <% end %>
     </nav>
 

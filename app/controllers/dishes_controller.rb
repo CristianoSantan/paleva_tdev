@@ -3,7 +3,7 @@ class DishesController < ApplicationController
   before_action :set_dish_and_check_user, only: [:show, :edit, :update, :disabled, :enabled]
 
   def index
-		@dishes = current_user.establishment.dishes
+		@dishes = current_account.establishment.dishes
 	end
 
   def show
@@ -14,7 +14,7 @@ class DishesController < ApplicationController
 	def new
 		@dish = Dish.new()
 		@dish.tags.build
-		@tags = current_user.establishment.tags
+		@tags = current_account.establishment.tags
 	end
 
 	def create
@@ -30,7 +30,7 @@ class DishesController < ApplicationController
 
 	def edit
 		@dish.tags.build if @dish.tags.empty?
-		@tags = current_user.establishment.tags
+		@tags = current_account.establishment.tags
 	end
 
 	def update
@@ -56,7 +56,7 @@ class DishesController < ApplicationController
 
 	def set_dish_and_check_user
 		@dish = Dish.find(params[:id])
-		if @dish.establishment.user != current_user
+		if @dish.establishment.id != current_establishment.id
 				return redirect_to root_path, alert: 'Você não possui acesso a esse prato.'
 		end
 	end

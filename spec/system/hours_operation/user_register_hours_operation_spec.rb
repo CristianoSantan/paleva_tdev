@@ -8,7 +8,7 @@ describe "Usuário registra um horário" do
     establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', user: user )
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Estabelecimento'
     click_on 'Cadastrar Horário'
@@ -27,7 +27,7 @@ describe "Usuário registra um horário" do
     establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', user: user )
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Estabelecimento'
     click_on 'Cadastrar Horário'
@@ -46,7 +46,7 @@ describe "Usuário registra um horário" do
     establishment = Establishment.create!(brand_name: 'pizzafire', company_name: 'pizzafire restaurantes', cnpj: cnpj,
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', user: user )
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Estabelecimento'
     click_on 'Cadastrar Horário'

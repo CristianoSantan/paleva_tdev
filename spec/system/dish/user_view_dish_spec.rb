@@ -9,7 +9,7 @@ describe "Usuário vê tela de pratos" do
       full_address: 'Rua Dom Pedro, 280', phone: '1122332233', email: 'pizzafire@email.com', 
       code: 'ABC123', user: user )
   
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'
@@ -28,7 +28,7 @@ describe "Usuário vê tela de pratos" do
       code: 'ABC123', user: user )
     dish = Dish.create!(name: 'Toscana', description: 'Mussarales, calabresa e cebola', calories: 300, establishment: establishment)
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'
@@ -47,7 +47,7 @@ describe "Usuário vê tela de pratos" do
       code: 'ABC123', user: user )
     dish = Dish.create!(name: 'Toscana', description: 'Mussarales, calabresa e cebola', calories: 300, establishment: establishment)
     
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'

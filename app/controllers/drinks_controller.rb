@@ -3,7 +3,7 @@ class DrinksController < ApplicationController
   before_action :set_drink_and_check_user, only: [:show, :edit, :update, :disabled, :enabled]
 
   def index
-		@drinks = current_user.establishment.drinks
+		@drinks = current_account.establishment.drinks
 	end
 
   def show
@@ -50,7 +50,7 @@ class DrinksController < ApplicationController
 
 	def set_drink_and_check_user
 		@drink = Drink.find(params[:id])
-		if @drink.establishment.user != current_user
+		if @drink.establishment.id != current_establishment.id
 				return redirect_to root_path, alert: 'Você não possui acesso a essa bebida.'
 		end
 	end

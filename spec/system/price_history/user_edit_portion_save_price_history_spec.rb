@@ -10,7 +10,7 @@ describe "Usuário edita porção e salva o preço" do
     dish = Dish.create!(name: 'Batata Frita', description: 'rústica', calories: 300, establishment: establishment, status: 'enabled')
     # portion_1 = Portion.create!(description: 'Porção Pequena', real: 20, cent: 0, portionable: dish)
 
-    login_as(user)
+    login_as(user, scope: :user)
     visit root_path
     within('nav') do
       click_on 'Estabelecimento'

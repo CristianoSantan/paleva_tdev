@@ -1,0 +1,26 @@
+<h1>Pré-cadastros</h1>
+
+<%= link_to "Adicionar Funcionário", new_pre_registration_path %>
+
+<% if @pre_registrations %>
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>CPF</th>
+      <th>Cadastro</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pre_registrations.each do |register| %>
+      <tr>
+        <td><%= register.email %></td>
+        <td><%= register.cpf %></td>
+        <td><%= register.used ? "Utilizado" : "Não utilizado" %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <p>Sem pré-cadastros</p>
+<% end %>

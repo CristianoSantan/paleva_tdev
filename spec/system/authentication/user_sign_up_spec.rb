@@ -5,7 +5,7 @@ describe "Usuário cria uma conta" do
     cpf = CPF.generate
 
     visit root_path
-    click_on 'Entrar'
+    click_on 'Dono'
     click_on 'Criar uma conta'
     fill_in "Nome",	with: "Maria" 
     fill_in "CPF",	with: cpf 
@@ -22,7 +22,7 @@ describe "Usuário cria uma conta" do
 
   it "com dados incompletos" do
     visit root_path
-    click_on 'Entrar'
+    click_on 'Dono'
     click_on 'Criar uma conta'
     fill_in "Nome",	with: "" 
     fill_in "CPF",	with: "" 
@@ -42,7 +42,7 @@ describe "Usuário cria uma conta" do
     cpf = CPF.generate
 
     visit root_path
-    click_on 'Entrar'
+    click_on 'Dono'
     click_on 'Criar uma conta'
     fill_in "Nome",	with: "Maria" 
     fill_in "CPF",	with: cpf 

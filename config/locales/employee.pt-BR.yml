@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      employee: 
+        one: Funcionário
+        other: Funcionários
+    attributes:
+      employee:
+        name: "Nome"
+        cpf: "CPF"
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirme sua senha"
