@@ -47,4 +47,30 @@ class Api::V1::OrdersController < Api::V1::ApiController
       render status: 404, json: { error: 'Pedido não encontrado' }
     end
   end
+
+  def update
+    order = Order.joins(:establishment)
+                  .where(establishments: { code: params[:establishment_code] })
+                  .find_by(code: params[:order_code])
+
+    order_status = params["status"]
+
+    if order.update(status: order_status)
+      render status: 201, json: order.as_json(
+        only: [:created_at, :name, :status],
+        include: {
+          order_items: {
+            only: [:note],
+            include: { 
+              orderable: { only: [:name, :description, :calories] },
+              portion: { only: [:description, :real, :cent] }
+            }
+          }
+        }
+      )
+    else
+      render status: 404, json: { error: 'Pedido não encontrado' }
+    end
+  end
+
 end
