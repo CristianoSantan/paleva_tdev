@@ -69,3 +69,11 @@ MenuItem.create!(menu: menu_executive_lunch, menuable: lunch_dish1)
 MenuItem.create!(menu: menu_executive_lunch, menuable: lunch_dish2)
 MenuItem.create!(menu: menu_executive_lunch, menuable: lunch_drink)
 
+order = Order.create!(name: 'José', phone: '1122332233', email: 'jose@email', cpf: CPF.generate,
+  code: 'ABCD1234', status: 'waiting', establishment: establishment)
+order_item = OrderItem.create!(order: order, orderable:dish, portion: portion_dish_1, note: 'sem cebola')
+
+order2 = Order.create!(name: 'Maria', phone: '1144554455', email: 'maria@email', cpf: CPF.generate,
+  code: 'ABCD5678', status: 'ready', establishment: establishment)
+order_item2 = OrderItem.create!(order: order2, orderable:dish, portion: portion_dish_1, note: 'com cebola')
+
