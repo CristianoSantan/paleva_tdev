@@ -1,17 +1,19 @@
 class Api::V1::OrdersController < Api::V1::ApiController
 
   def index
-    code = params["establishment_code"]
-    status = params["status"]
+    code = params[:establishment_code]
+    status = params[:status]
+
+    orders = Order.all.joins(:establishment).where(establishments: { code: code }, status: status)
     
     if status.nil? || status == ""
       orders = Order.all
-    else
-      orders = Order.all.joins(:establishment).where(establishment: { code: code }, status: status)
     end
     
+    orders = orders.order(created_at: :desc)
+    
     render status: 200, json: orders.as_json(
-        except: [:created_at, :updated_at],
+        except: [:updated_at],
         include: {
           establishment: {only: [:brand_name, :code]},
           order_items: {
@@ -32,7 +34,7 @@ class Api::V1::OrdersController < Api::V1::ApiController
 
     if order
       render status: 200, json: order.as_json(
-        only: [:created_at, :name, :status],
+        except: [:updated_at],
         include: {
           order_items: {
             only: [:note],
@@ -57,7 +59,7 @@ class Api::V1::OrdersController < Api::V1::ApiController
 
     if order.update(status: order_status)
       render status: 201, json: order.as_json(
-        only: [:created_at, :name, :status],
+        except: [:updated_at],
         include: {
           order_items: {
             only: [:note],
@@ -69,7 +71,7 @@ class Api::V1::OrdersController < Api::V1::ApiController
         }
       )
     else
-      render status: 404, json: { error: 'Pedido não encontrado' }
+      render status: 404, json: { error: 'Pedido não atualizado' }
     end
   end
 

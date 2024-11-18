@@ -33,10 +33,10 @@ describe "Order API" do
       json_response = JSON.parse(response.body)
       expect(json_response.class).to eq Array
       expect(json_response.length).to eq 2
-      expect(json_response[0]["name"]).to eq "José"
-      expect(json_response[0]["order_items"][0]["note"]).to eq "sem cebola"
-      expect(json_response[1]["name"]).to eq "Maria"
-      expect(json_response[1]["order_items"][0]["note"]).to eq "com cebola"
+      expect(json_response[0]["name"]).to eq "Maria"
+      expect(json_response[0]["order_items"][0]["note"]).to eq "com cebola"
+      expect(json_response[1]["name"]).to eq "José"
+      expect(json_response[1]["order_items"][0]["note"]).to eq "sem cebola"
     end
 
     it "list all orders without params status" do
@@ -70,10 +70,10 @@ describe "Order API" do
       json_response = JSON.parse(response.body)
       expect(json_response.class).to eq Array
       expect(json_response.length).to eq 2
-      expect(json_response[0]["name"]).to eq "José"
-      expect(json_response[0]["order_items"][0]["note"]).to eq "sem cebola"
-      expect(json_response[1]["name"]).to eq "Maria"
-      expect(json_response[1]["order_items"][0]["note"]).to eq "com cebola"
+      expect(json_response[1]["name"]).to eq "José"
+      expect(json_response[1]["order_items"][0]["note"]).to eq "sem cebola"
+      expect(json_response[0]["name"]).to eq "Maria"
+      expect(json_response[0]["order_items"][0]["note"]).to eq "com cebola"
     end
 
     it "list all orders with params of establishment and filter by status" do
