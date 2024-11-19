@@ -24,5 +24,7 @@ describe "Funcionário cria uma conta" do
     employee = Employee.last
     expect(employee.name).to eq 'Maria'
     expect(page).to have_button 'Sair'
+    pre_reg = PreRegistration.last
+    expect(pre_reg.used).to eq true
   end
 end

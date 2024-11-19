@@ -11,6 +11,9 @@ establishment = Establishment.create!(
   user: user
 )
 
+pre_registration = PreRegistration.create!(cpf: cpf_employee, email: "kurt@email.com", establishment: establishment)
+employee = Employee.create!(name: 'Kurt Donald Cobain', email: "kurt@email.com", cpf: cpf_employee, establishment: establishment, password: 'password1234')
+
 # Menus
 menu_rock_classics = Menu.create!(name: 'Rock Classics', establishment: establishment)
 menu_breakfast = Menu.create!(name: 'Café da Manhã', establishment: establishment)

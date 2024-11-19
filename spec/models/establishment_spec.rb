@@ -71,6 +71,15 @@ RSpec.describe Establishment, type: :model do
       expect(result.include?(:code)).to be true
       expect(result[:code]).to include 'não pode ficar em branco'
     end
+
+    it "Código com 6 caracteres" do
+      establishment = Establishment.new(code: "ABC123")
+
+      establishment.valid?
+      result = establishment.errors
+
+      expect(result.include?(:code)).to be false
+    end
     
     it "o cnpj precisa ser um número válido" do
       cnpj = CNPJ.generate

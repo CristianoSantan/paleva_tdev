@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      pre_registration: 
+        one: Pré-cadastro
+        other: Pré-cadastros
+    attributes:
+      pre_registration:
+        email: "E-mail"
+        cpf: "CPF"

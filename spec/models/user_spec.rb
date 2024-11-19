@@ -29,6 +29,22 @@ RSpec.describe User, type: :model do
       expect(user).not_to be_valid 
       expect(user.errors[:password]).to include("não pode ficar em branco")
     end
+    
+    it "senha deve possuir ao menos 12 caracteres" do
+      cpf = CPF.generate
+      user = User.new(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: '123456789')
+      expect(user).not_to be_valid 
+      expect(user.errors[:password]).to include("é muito curto (mínimo: 12 caracteres)")
+    end
+
+    it "senha tem mais que 12 caracteres" do
+      cpf = CPF.generate
+      user = User.new(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: '1234567890123')
+
+      user.valid?
+      result = user.errors
+      expect(result.include?(:password)).to be false
+    end
 
     it "cpf não possui o tamanho esperado" do
       user = User.new(cpf: '123654')
