@@ -12,10 +12,17 @@ PaLeva é uma solução completa para a gestão de restaurantes, permitindo o co
 - **Interface de Autenticação**: Gerenciamento seguro de usuários e restrição de funcionalidades.
 
 ## Pré-requisitos
+1. **setup**:
+   - Ruby 3.1+
+   - Rails 7.2.1+
+   - SQLite 
 
-- **Ruby 3.1+**
-- **Rails 7.2.1+**
-- **SQLite** 
+2. **gems instaladas**:
+   - gem "devise", "~> 4.9"
+   - gem "cpf_cnpj"
+   - gem "rack-cors"
+   - gem "rspec-rails"
+   - gem "capybara"
 
 ## Instalação
 
@@ -50,10 +57,12 @@ PaLeva é uma solução completa para a gestão de restaurantes, permitindo o co
    Abra seu navegador e acesse `http://localhost:3000` para ver o PaLeva em funcionamento.
 
 6. **Login no Sistema**:
-   Para se logar com o usuário criado pelas seeds, use os seguintes dados:
+   Para se logar com o usuário criado pelas seeds, use os seguintes dados, este é um usuario do tipo dono de estabelecimento, então basta entrar na aplicação e fazer login no link de dono:
 
-- Email: freddie@burgerqueen.com
-- Senha: password1234
+   - Email: `freddie@burgerqueen.com`
+   - Senha: `password1234`
+
+   <img src="./app/assets/images/login_dono.png" alt="login dono" width="400px"/>
 
 ## Uso Básico
 

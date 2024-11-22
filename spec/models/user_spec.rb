@@ -3,46 +3,46 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe "#valid?" do
     it "falso quando nome vazio" do
-      cpf = CPF.generate
-      user = User.new(name: '', cpf: cpf, email: 'joao@email.com', password: 'password1234')
+      user = User.new(name: '', cpf: CPF.generate, email: 'joao@email.com', password: 'password1234')
+      
       expect(user).not_to be_valid
       expect(user.errors[:name]).to include("não pode ficar em branco")
     end
 
     it "falso quando cpf vazio" do
-      cpf = CPF.generate
       user = User.new(name: 'João Silva', cpf: '', email: 'joao@email.com', password: 'password1234')
+     
       expect(user).not_to be_valid 
       expect(user.errors[:cpf]).to include("não pode ficar em branco")
     end
 
     it "falso quando email vazio" do
-      cpf = CPF.generate
-      user = User.new(name: 'João Silva', cpf: cpf, email: '', password: 'password1234')
+      user = User.new(name: 'João Silva', cpf: CPF.generate, email: '', password: 'password1234')
+     
       expect(user).not_to be_valid 
       expect(user.errors[:email]).to include("não pode ficar em branco")
     end
     
     it "falso quando senha vazio" do
-      cpf = CPF.generate
-      user = User.new(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: '')
+      user = User.new(name: 'João Silva', cpf: CPF.generate, email: 'joao@email.com', password: '')
+      
       expect(user).not_to be_valid 
       expect(user.errors[:password]).to include("não pode ficar em branco")
     end
     
     it "senha deve possuir ao menos 12 caracteres" do
-      cpf = CPF.generate
-      user = User.new(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: '123456789')
+      user = User.new(name: 'João Silva', cpf: CPF.generate, email: 'joao@email.com', password: '123456789')
+      
       expect(user).not_to be_valid 
       expect(user.errors[:password]).to include("é muito curto (mínimo: 12 caracteres)")
     end
 
     it "senha tem mais que 12 caracteres" do
-      cpf = CPF.generate
-      user = User.new(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: '1234567890123')
+      user = User.new(name: 'João Silva', cpf: CPF.generate, email: 'joao@email.com', password: '1234567890123')
 
       user.valid?
       result = user.errors
+      
       expect(result.include?(:password)).to be false
     end
 

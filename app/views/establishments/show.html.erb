@@ -1,7 +1,7 @@
 <h1>Estabelecimento</h1>
 
 <div>
-  <%= link_to 'Editar Estabelecimento', edit_establishment_path(@establishment) %>
+  <%= link_to 'Editar Estabelecimento', edit_establishment_path(@establishment) if user_signed_in? %>
 </div>
 <dl>
   <dt>Dono do estabelecimento:</dt>
@@ -23,15 +23,15 @@
 </dl>
 
 <div>
-  <%= link_to 'Pratos', dishes_path %>
+  <%= link_to 'Pratos', dishes_path if user_signed_in? %>
 </div>
 
 <div>
-  <%= link_to 'Bebidas', drinks_path %>
+  <%= link_to 'Bebidas', drinks_path if user_signed_in? %>
 </div>
 
 <div>
-  <%= link_to 'Cadastrar Marcadores', new_tag_path %>
+  <%= link_to 'Cadastrar Marcadores', new_tag_path if user_signed_in? %>
 </div>
 
 <dl>
@@ -45,7 +45,7 @@
 </div>
 
 <div>
-  <%= link_to 'Cadastrar Horário', new_hours_operation_path %>
+  <%= link_to 'Cadastrar Horário', new_hours_operation_path if user_signed_in? %>
 </div>
 
 <table>
@@ -55,7 +55,7 @@
       <th>Abertura</th>
       <th>Fechamento</th>
       <th>Fechado</th>
-      <th>Ações</th>
+      <th><%= 'Ações' if user_signed_in? %></th>
     </tr>
   </thead>
   <tbody>
@@ -65,7 +65,7 @@
         <td><%= hour.opening_time.strftime("%H:%M") %></td>
         <td><%= hour.closing_time.strftime("%H:%M") %></td>
         <td><%= hour.closed ? 'Fechado' : 'Aberto' %></td>
-        <td><%= link_to "editar", edit_hours_operation_path(hour.id) %></td>
+        <td><%= link_to "editar", edit_hours_operation_path(hour.id) if user_signed_in? %></td>
       </tr>
     <% end %>
   </tbody>

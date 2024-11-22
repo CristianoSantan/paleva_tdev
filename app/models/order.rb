@@ -8,6 +8,12 @@ class Order < ApplicationRecord
 
   enum :status, { 'waiting' => 0, 'in_preparation' => 5, 'canceled' => 10, 'ready' => 15, 'delivered' => 20 }
   
+  validates :name, :cpf, presence: true
+  validates :phone, presence: true, if: -> { !email.present? }
+  validates :email, presence: true, if: -> { !phone.present? }
+  validates :cpf, length: { is: 11 }
+  validate :cpf_valid
+
   before_validation :generate_code, on: :create
 
   def total
@@ -18,6 +24,12 @@ class Order < ApplicationRecord
   end
 
   private
+  
+  def cpf_valid
+    unless CPF.valid?(self.cpf)
+      self.errors.add(:cpf, "deve ser válido")
+    end
+  end
 
   def generate_code
     self.code = SecureRandom.alphanumeric(8).upcase

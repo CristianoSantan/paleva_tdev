@@ -83,11 +83,11 @@ RSpec.describe Establishment, type: :model do
     
     it "o cnpj precisa ser um número válido" do
       cnpj = CNPJ.generate
-      
       establishment = Establishment.new(cnpj: cnpj)
       
       establishment.valid?
       result = establishment.errors
+
       expect(result.include?(:cnpj)).to be false
     end
 
@@ -105,6 +105,7 @@ RSpec.describe Establishment, type: :model do
   
       establishment.valid?
       result = establishment.errors
+      
       expect(result.include?(:phone)).to be true
       expect(result[:phone]).to include 'é muito curto (mínimo: 10 caracteres)'
     end

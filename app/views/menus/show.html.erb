@@ -4,6 +4,9 @@
 
 <% @menu_items.each do |item| %>
   <div>
+    <% if item.menuable.image.attached? %>
+      <%= image_tag item.menuable.image, alt: "", title: "Prato", width: "200" %>
+    <% end %>
     <p><%= item.menuable.name %></p>
     <% item.menuable.portions.each do |portion| %>
       <p><%= portion.description %> - R$ <%= portion.real %>,<%= portion.cent.to_s.rjust(2, '0') %></p>

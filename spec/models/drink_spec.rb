@@ -13,6 +13,7 @@ RSpec.describe Drink, type: :model do
 
       expect(drink.image).to be_attached
     end
+    
     it "Nome não pode ser vazio" do
       drink = Drink.new(name: "")
 

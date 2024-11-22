@@ -5,7 +5,5 @@ RSpec.describe Employee, type: :model do
     it "description" do
       
     end
-    
   end
-  
 end

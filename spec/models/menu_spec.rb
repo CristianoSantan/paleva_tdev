@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Menu, type: :model do
   describe "#Valid?" do
-    it "Nome é obrigatório" do
+    it "nome não pode ficar em branco" do
       menu = Menu.new(name: "")
 
       menu.valid?
@@ -12,7 +12,7 @@ RSpec.describe Menu, type: :model do
       expect(result[:name]).to include 'não pode ficar em branco'
     end
 
-    it "Nome é único dentro do escopo de estabelecimento" do
+    it "nome é único dentro do escopo de estabelecimento" do
       cpf = CPF.generate
       cnpj = CNPJ.generate
       user = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
@@ -28,7 +28,7 @@ RSpec.describe Menu, type: :model do
       expect(result[:name]).to include 'já existe para este estabelecimento'
     end
 
-    it "Nome não é único fora do escopo de estabelecimento" do
+    it "nome não é único fora do escopo de estabelecimento" do
       cpf = CPF.generate
       cnpj = CNPJ.generate
       joao = User.create!(name: 'João Silva', cpf: cpf, email: 'joao@email.com', password: 'password1234')
@@ -45,5 +45,16 @@ RSpec.describe Menu, type: :model do
 
       expect(result.include?(:name)).to be false
     end
+
+    it "estabelecimento é obrigatório" do
+      menu = Menu.new(establishment: nil)
+
+      menu.valid?
+      result = menu.errors
+
+      expect(result.include?(:establishment)).to be true
+      expect(result[:establishment]).to include 'é obrigatório(a)'
+    end
+    
   end
 end

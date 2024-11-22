@@ -43,5 +43,15 @@ RSpec.describe Dish, type: :model do
       expect(result.include?(:calories)).to be true
       expect(result[:calories]).to include 'não pode ficar em branco'
     end
+
+    it "estabelecimento é obrigatório" do
+      dish = Dish.new(establishment: nil)
+
+      dish.valid?
+      result = dish.errors
+
+      expect(result.include?(:establishment)).to be true
+      expect(result[:establishment]).to include 'é obrigatório(a)'
+    end
   end
 end
