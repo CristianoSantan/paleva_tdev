@@ -59,10 +59,16 @@ PaLeva é uma solução completa para a gestão de restaurantes, permitindo o co
 6. **Login no Sistema**:
    Para se logar com o usuário criado pelas seeds, use os seguintes dados, este é um usuario do tipo dono de estabelecimento, então basta entrar na aplicação e fazer login no link de dono:
 
-   - Email: `freddie@burgerqueen.com`
+   - Email do dono: `freddie@burgerqueen.com`
    - Senha: `password1234`
 
    <img src="./app/assets/images/login_dono.png" alt="login dono" width="400px"/>
+
+   ou pode logar como um funcionario:
+
+   - Email do funcionario: `kurt@email.com`
+   - Senha: `password1234`
+
 
 ## Uso Básico
 
